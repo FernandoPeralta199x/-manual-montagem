@@ -18,6 +18,12 @@ Regra: toda informação que não vem do modelo, da lista de corte ou do PDF lev
 
 ## Campos
 
+### `marca`
+```json
+"marca": {"nome": "Luciano Lâminas", "logo": "luciano-laminas.png", "cor": "#00258A"}
+```
+Logo na capa, no cabeçalho de todas as folhas e no carimbo do desenho técnico final; `cor` é a cor institucional (painel da capa, cabeçalhos de tabelas e cartões). O `logo` é procurado na pasta do spec e depois em `mm/assets/marca/`. Sem o campo, vale o padrão (Luciano Lâminas). `"marca": null` gera o manual sem marca.
+
 ### `projeto`
 ```json
 {"cliente": "...", "codigo": "74391", "pedido": "581885-74391 - Moveis", "data_venda": "06/10/2026",

@@ -9,6 +9,7 @@ from .draw import esc
 from .cutlist import lam_expand
 
 ASSETS = os.path.join(os.path.dirname(__file__), 'assets')
+MARCA_PADRAO = {'nome': 'Luciano Lâminas', 'logo': 'luciano-laminas.png', 'cor': '#00258A'}
 TAGS = {'E': 'Encontrado no projeto', 'C': 'Calculado a partir do modelo', 'I': 'Inferido — confirmar', 'A': 'Ausente / não identificado'}
 
 
@@ -51,6 +52,26 @@ class Manual:
         self.PJ = self.S['projeto']
         self.pages = []
         self.fer = {f['code']: f for f in self.S.get('ferragens', [])}
+        self.marca = self._marca()
+
+    def _marca(self):
+        """Logo e cor da marca. Padrão do template: Luciano Lâminas. "marca": null desliga."""
+        if 'marca' in self.S and self.S['marca'] is None:
+            return None
+        mk = dict(MARCA_PADRAO)
+        mk.update(self.S.get('marca') or {})
+        logo = mk.get('logo')
+        path = None
+        if logo:
+            for cand in (os.path.join(self.pj.dir, logo), os.path.join(ASSETS, 'marca', logo)):
+                if os.path.exists(cand):
+                    path = cand
+                    break
+        mk['logo_path'] = path
+        return mk
+
+    def logo(self, cls=''):
+        return '<i class="logo %s"></i>' % cls if self.marca and self.marca.get('logo_path') else ''
 
     def page(self, section, html, mod='', cls=''):
         self.pages.append((section, mod, html, cls))
@@ -70,7 +91,7 @@ class Manual:
             caps += '<span class="cv-cap">%s · %s · %s × %s × %s</span>' % (mid, m['nome'], F(hi[0] - lo[0]), F(hi[1] - lo[1]), F(hi[2] - lo[2]))
             mods += '%s — %s<br>' % (mid, m['nome'])
         n_alta = sum(1 for c in self.S.get('conflitos', []) if c['prioridade'] == 'ALTA')
-        aviso = self.S.get('aviso_capa') or ('<b>Antes de montar:</b> leia a seção 2.3 — Conflitos e pendências.' + (' Há %d ponto(s) de prioridade ALTA a confirmar com a produção.' % n_alta if n_alta else ''))
+        aviso = self.S.get('aviso_capa') or ('<b>Antes de montar:</b> leia a seção 2.3 — Conflitos e pendências.' + ((' Há 1 ponto de prioridade ALTA a confirmar com a produção.' if n_alta == 1 else ' Há %d pontos de prioridade ALTA a confirmar com a produção.' % n_alta) if n_alta else ''))
         html = '''<div class="cover"><div class="cv-left">
 <div class="cv-kicker">Documentação técnica de fabricação + montagem</div>
 <div class="cv-title">Manual de<br>Montagem</div>
@@ -79,8 +100,8 @@ class Manual:
 <tr><th>Pedido (lista de corte)</th><td class="mono">%s</td></tr><tr><th>Data da venda</th><td class="mono">%s</td></tr>
 <tr><th>Módulos</th><td>%s</td></tr></table>
 <div class="cv-warn">%s</div></div>
-<div class="cv-right"><div class="cv-fig">%s<div class="cv-caps">%s</div><div class="cv-src">Desenhos gerados a partir do arquivo SketchUp do projeto, na mesma escala.</div></div></div></div>''' % (
-            esc(P['codigo']), esc(P['cliente']), esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), esc(P.get('data_venda', '—')), mods, tx(aviso), cover_scene(pj, 160, 150), caps)
+<div class="cv-right">%s<div class="cv-fig">%s<div class="cv-caps">%s</div><div class="cv-src">Desenhos gerados a partir do arquivo SketchUp do projeto, na mesma escala.</div></div></div></div>''' % (
+            esc(P['codigo']), esc(P['cliente']), esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), esc(P.get('data_venda', '—')), mods, tx(aviso), self.logo('cv-brand'), cover_scene(pj, 160, 138), caps)
         self.page('Capa', html, cls='p-cover')
 
     # ------------------------------------------------------------ 1
@@ -400,10 +421,10 @@ class Manual:
             (a, b), s = ortho_set(pj, mid, [('front', wf, Hh), ('right', wr, Hh)], detail=False)
             groups += '<div class="fgroup"><div class="fg-t">%s — %s</div><div class="fg-v"><figure>%s<figcaption>Frontal</figcaption></figure><figure>%s<figcaption>Lateral direita</figcaption></figure></div></div>' % (mid, esc(pj.mods[mid]['nome']), a, b)
         P = self.PJ
-        tb = '''<table class="titleblock"><tr><th>Cliente</th><td>%s</td><th>Código</th><td class="mono">%s</td><th>Pedido</th><td class="mono">%s</td><th>Data venda</th><td class="mono">%s</td></tr>
+        tb = '''<table class="titleblock"><tr>%s<th>Cliente</th><td>%s</td><th>Código</th><td class="mono">%s</td><th>Pedido</th><td class="mono">%s</td><th>Data venda</th><td class="mono">%s</td></tr>
 <tr><th>Conteúdo</th><td colspan="3">%s — vistas frontal e lateral direita</td><th>Unidade</th><td>mm</td><th>Escala</th><td>sem escala — usar as cotas</td></tr>
 <tr><th>Fonte</th><td colspan="7">Geometria do modelo SketchUp (%s). Cotas %s. Vistas de cada módulo na mesma escala entre si.</td></tr></table>''' % (
-            esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), esc(P.get('data_venda', '—')), ' · '.join('%s %s' % (m, esc(pj.mods[m]['nome'])) for m in mids), esc(P['arquivos']['skp']), tg('E'))
+            ('<td rowspan="3" class="tb-logo">%s</td>' % self.logo()) if self.logo() else '', esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), esc(P.get('data_venda', '—')), ' · '.join('%s %s' % (m, esc(pj.mods[m]['nome'])) for m in mids), esc(P['arquivos']['skp']), tg('E'))
         self.page('16 · Desenho técnico final', h1('16', 'Desenho técnico final') + '<div class="final2"><div class="frow">%s</div>%s</div>' % (groups, tb))
 
     # ------------------------------------------------------------ anexos
@@ -466,16 +487,23 @@ class Manual:
             if cls == 'p-cover':
                 inner = html
             else:
-                inner = '''<header class="pg-h"><span class="ph-l">MANUAL DE MONTAGEM · <b>%s</b></span><span class="ph-c">%s</span><span class="ph-r">%s</span></header>
+                inner = '''<header class="pg-h"><span class="ph-l">%s<span>MANUAL DE MONTAGEM · <b>%s</b></span></span><span class="ph-c">%s</span><span class="ph-r">%s</span></header>
 <main class="pg-m">%s</main>
 <footer class="pg-f"><table><tr><th>Cliente</th><td>%s</td><th>Código</th><td class="mono">%s</td><th>Pedido</th><td class="mono">%s</td><th>Seção</th><td>%s</td><th>Folha</th><td class="mono b">%02d / %02d</td></tr></table></footer>''' % (
-                    esc(P['codigo']), sec, mod, html, esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), sec, i + 1, total)
+                    self.logo(), esc(P['codigo']), sec, mod, html, esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), sec, i + 1, total)
             sheets.append('<div class="sheet-wrap"><section class="sheet %s" id="folha-%02d">%s</section></div>' % (cls, i + 1, inner))
         js = '''<script>(function(){var MM=96/25.4;function fit(){var w=document.documentElement.clientWidth;var s=Math.min(1,(w-24)/(297*MM));document.querySelectorAll('.sheet-wrap').forEach(function(x){var sh=x.firstElementChild;sh.style.transform='scale('+s+')';x.style.width=(297*MM*s)+'px';x.style.height=(210*MM*s)+'px';});}
 if(!(window.matchMedia&&window.matchMedia('print').matches)){fit();window.addEventListener('resize',fit);}})();</script>'''
         css = open(os.path.join(ASSETS, 'manual.css'), encoding='utf-8').read()
         title = 'Manual de Montagem %s' % P['codigo']
-        head = '<title>%s</title><style>%s\n%s</style>' % (esc(title), font_css(), css)
+        brand_css = ''
+        if self.marca:
+            brand_css = ':root{--brand:%s}' % self.marca.get('cor', '#1d1f21')
+            if self.marca.get('logo_path'):
+                b64 = base64.b64encode(open(self.marca['logo_path'], 'rb').read()).decode()
+                mime = 'image/svg+xml' if self.marca['logo_path'].endswith('.svg') else 'image/png'
+                brand_css += '.logo{background-image:url(data:%s;base64,%s)}' % (mime, b64)
+        head = '<title>%s</title><style>%s\n%s\n%s</style>' % (esc(title), font_css(), css, brand_css)
         intro = '<div class="screen-intro"><b>Manual de Montagem · Pedido %s</b> · %s · %d folhas A4 paisagem</div>' % (esc(P['codigo']), esc(P['cliente']), total)
         body = '%s<div class="doc">%s</div>%s' % (intro, '\n'.join(sheets), js)
         if full_doc:

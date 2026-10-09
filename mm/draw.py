@@ -5,8 +5,8 @@ INK = '#1d1f21'
 INK2 = '#55595e'
 GHOST_FILL = '#eeeeec'
 GHOST_STROKE = '#a3a6a9'
-ACCENT = '#e8590c'
-ACCENT_FILL = '#f7b088'
+ACCENT = '#ef6a00'
+ACCENT_FILL = '#f9b98a'
 MAT = {
     'Manhattan': '#a3a8ad',
     'Carvalho Natural': '#dcc29b',

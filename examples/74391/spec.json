@@ -1,5 +1,10 @@
 {
  "versao": 1,
+ "marca": {
+  "nome": "Luciano Lâminas",
+  "logo": "luciano-laminas.png",
+  "cor": "#00258A"
+ },
  "projeto": {
   "cliente": "FELIPPE DE SOUZA LAURENTINO",
   "codigo": "74391",
