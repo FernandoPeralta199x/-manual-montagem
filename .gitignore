@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+saida/
+# arquivos de clientes ficam fora do repositório
+examples/**/*.skp
+examples/**/*.skb
+examples/**/*.csv
+examples/**/*.pdf
+examples/**/inventario.txt

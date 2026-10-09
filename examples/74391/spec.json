@@ -1,0 +1,1841 @@
+{
+ "versao": 1,
+ "projeto": {
+  "cliente": "FELIPPE DE SOUZA LAURENTINO",
+  "codigo": "74391",
+  "pedido": "581885-74391 - Moveis",
+  "data_venda": "06/10/2026",
+  "fabricante": null,
+  "endereco": null,
+  "arquivos": {
+   "skp": "FELIPPE_DE_SOUZA_LAURENTINO.skp",
+   "csv": "581885-74391 - FELIPPE DE SOUZA LAURENTINO.csv",
+   "pdf": "74391 - FELIPPE DE SOUZA LAURENTINO.pdf"
+  },
+  "arquivos_desc": {
+   "Modelo 3D": "FELIPPE_DE_SOUZA_LAURENTINO.skp<br><span class=\"muted\">SketchUp 2024 (24.0.553) — modelo Gábster</span>",
+   "Desenho de venda": "74391 - FELIPPE DE SOUZA LAURENTINO.pdf (LayOut 2024, 2 folhas A4)",
+   "Lista de corte": "581885-74391 - FELIPPE DE SOUZA LAURENTINO.csv (42 linhas)",
+   "Backup": "FELIPPE_DE_SOUZA_LAURENTINO.skb (backup — mesmas peças e posições do .skp)"
+  }
+ },
+ "modulos": [
+  {
+   "id": "M01",
+   "nome": "Gaveteiro 4 gavetas",
+   "sub": "Corrediça invisível, com rodapé",
+   "rotulo": "MÓDULO 01 — GAVETEIRO 4 GAVETAS",
+   "raizes": [
+    "Gaveteiro inv 4 gav com rod"
+   ],
+   "gabster": "Gaveteiro 4 gavetas Corrediça Invisível com rodapé (comp. Gábster 428778) {E}",
+   "pdf_spec": [
+    "Caixa — MDF Manhattan 15 mm",
+    "Fundo — MDF Branco 6 mm",
+    "Frentes — MDF Manhattan 15 mm",
+    "Puxador Gala 128 mm {E}"
+   ],
+   "componentes": [
+    "Laterais, base, travessas e rodapé em MDF Manhattan",
+    "4 gavetas com corpo em chapa Branco 15 (lista de corte)",
+    "4 frentes Manhattan com puxador",
+    "Fundo em MDF Branco 6 mm",
+    "Sem tampo (travessas superiores)"
+   ],
+   "nota_montado": "Puxadores conforme o modelo (ver conflito C03).",
+   "nota_medidas": "<b>Cotas</b> em mm, calculadas da geometria do modelo {C}. Frentes: altura 158,75 (lista: 159) · folga entre frentes 3 · afastamento lateral 3. Rodapé recuado 12,5 da frente da caixa.",
+   "cotas": {
+    "cadeia_esquerda": [
+     "P08"
+    ],
+    "folga_lateral": "P08",
+    "recuo_base": "P04"
+   }
+  },
+  {
+   "id": "M02",
+   "nome": "Armário 1 porta",
+   "sub": "Com rodapé, prateleiras internas com recuo",
+   "rotulo": "MÓDULO 02 — ARMÁRIO 1 PORTA",
+   "raizes": [
+    "Armario 1 po. com rodape",
+    "Porta de giro direita",
+    "01. Prat. 15mm"
+   ],
+   "gabster": "Armário 1 Porta com rodapé (comp. Gábster 428591) + Porta de giro (428543) + Prateleira 15 mm (429041) {E}",
+   "pdf_spec": [
+    "Caixa — MDF Carvalho Natural 15 mm",
+    "Fundo — MDF Carvalho Natural 6 mm",
+    "Frentes — MDF Manhattan 15 mm",
+    "Puxador Gala 128 mm {E}"
+   ],
+   "componentes": [
+    "Caixa em MDF Carvalho Natural",
+    "1 porta de giro Manhattan (dobradiças à direita)",
+    "1 prateleira 15 mm sobre a porta",
+    "3 prateleiras internas 18 mm com recuo",
+    "Fundo em MDF Carvalho Natural 6 mm"
+   ],
+   "nota_montado": "Puxador conforme o modelo (ver conflito C03).",
+   "nota_medidas": "<b>Cotas</b> em mm, calculadas da geometria do modelo {C}. Cota em cadeia à esquerda: alturas a partir do piso (rodapé 100). Vão livre entre prateleiras internas: 349. Recuo das prateleiras internas: 54.",
+   "cotas": {
+    "cadeia_esquerda": [
+     "P16",
+     "P20",
+     "P21",
+     "P17"
+    ],
+    "cadeia_extra": [
+     100
+    ],
+    "cadeia_direita": [
+     "P22"
+    ],
+    "recuo_topo": "P21"
+   }
+  }
+ ],
+ "pecas": [
+  {
+   "code": "P01",
+   "mod": "M01",
+   "nome": "Lateral esquerda",
+   "sel": "Lateral esq",
+   "funcao": "caixa",
+   "ids": [
+    "57559"
+   ],
+   "mdf_pdf": true
+  },
+  {
+   "code": "P02",
+   "mod": "M01",
+   "nome": "Lateral direita",
+   "sel": "Lateral dir",
+   "funcao": "caixa",
+   "ids": [
+    "57558"
+   ],
+   "mdf_pdf": true
+  },
+  {
+   "code": "P03",
+   "mod": "M01",
+   "nome": "Base inferior",
+   "sel": "Base inferior",
+   "funcao": "caixa",
+   "ids": [
+    "57560"
+   ],
+   "mdf_pdf": true
+  },
+  {
+   "code": "P04",
+   "mod": "M01",
+   "nome": "Rodapé",
+   "sel": "rodape",
+   "funcao": "caixa",
+   "ids": [
+    "57561"
+   ],
+   "mdf_pdf": true
+  },
+  {
+   "code": "P05",
+   "mod": "M01",
+   "nome": "Travessa frontal (batente frontal)",
+   "sel": "Travessa front",
+   "funcao": "caixa",
+   "ids": [
+    "57563"
+   ],
+   "mdf_pdf": true
+  },
+  {
+   "code": "P06",
+   "mod": "M01",
+   "nome": "Travessa traseira (batente traseiro)",
+   "sel": "Travessa traseira",
+   "funcao": "caixa",
+   "ids": [
+    "57562"
+   ],
+   "mdf_pdf": true
+  },
+  {
+   "code": "P07",
+   "mod": "M01",
+   "nome": "Fundo do módulo",
+   "sel": "fundo_modulo",
+   "funcao": "fundo",
+   "ids": [
+    "57588"
+   ],
+   "mdf_pdf": true
+  },
+  {
+   "code": "P08",
+   "mod": "M01",
+   "nome": "Frente de gaveta",
+   "sel": "Painel m",
+   "funcao": "frente",
+   "ids": [
+    "57552",
+    "57565",
+    "57573",
+    "57581"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C02"
+   ],
+   "alerta_espessura": true
+  },
+  {
+   "code": "P09",
+   "mod": "M01",
+   "nome": "Lateral esquerda da gaveta",
+   "sel": "lat_esq",
+   "funcao": "gaveta",
+   "ids": [
+    "57554",
+    "57567",
+    "57576",
+    "57583"
+   ]
+  },
+  {
+   "code": "P10",
+   "mod": "M01",
+   "nome": "Lateral direita da gaveta",
+   "sel": "lat_dir",
+   "funcao": "gaveta",
+   "ids": [
+    "57553",
+    "57566",
+    "57575",
+    "57582"
+   ]
+  },
+  {
+   "code": "P11",
+   "mod": "M01",
+   "nome": "Frontal do corpo da gaveta",
+   "sel": "lenco_frontal",
+   "funcao": "gaveta",
+   "ids": [
+    "57555",
+    "57568",
+    "57577",
+    "57584"
+   ],
+   "conflitos": [
+    "C04"
+   ]
+  },
+  {
+   "code": "P12",
+   "mod": "M01",
+   "nome": "Traseiro do corpo da gaveta",
+   "sel": "lenco traseiro",
+   "funcao": "gaveta",
+   "ids": [
+    "57557",
+    "57570",
+    "57579",
+    "57586"
+   ],
+   "conflitos": [
+    "C04"
+   ]
+  },
+  {
+   "code": "P13",
+   "mod": "M01",
+   "nome": "Fundo da gaveta",
+   "sel": "fundo gaveta",
+   "funcao": "gaveta",
+   "ids": [
+    "57556",
+    "57569",
+    "57578",
+    "57585"
+   ],
+   "conflitos": [
+    "C04"
+   ]
+  },
+  {
+   "code": "P14",
+   "mod": "M02",
+   "nome": "Lateral esquerda",
+   "sel": "Lateral esq",
+   "funcao": "caixa",
+   "ids": [
+    "57546"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C01"
+   ]
+  },
+  {
+   "code": "P15",
+   "mod": "M02",
+   "nome": "Lateral direita",
+   "sel": "Lateral dir",
+   "funcao": "caixa",
+   "ids": [
+    "57550"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C01"
+   ]
+  },
+  {
+   "code": "P16",
+   "mod": "M02",
+   "nome": "Base inferior",
+   "sel": "Base inferior",
+   "funcao": "caixa",
+   "ids": [
+    "57547"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C01"
+   ]
+  },
+  {
+   "code": "P17",
+   "mod": "M02",
+   "nome": "Base superior",
+   "sel": "Base superior",
+   "funcao": "caixa",
+   "ids": [
+    "57548"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C01"
+   ]
+  },
+  {
+   "code": "P18",
+   "mod": "M02",
+   "nome": "Rodapé",
+   "sel": "rodape",
+   "funcao": "caixa",
+   "ids": [
+    "57549"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C01"
+   ]
+  },
+  {
+   "code": "P19",
+   "mod": "M02",
+   "nome": "Fundo do módulo",
+   "sel": "fundo_modulo",
+   "funcao": "fundo",
+   "ids": [
+    "57545"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C01"
+   ]
+  },
+  {
+   "code": "P20",
+   "mod": "M02",
+   "nome": "Prateleira 15 mm (sobre a porta)",
+   "sel": "PT Editável",
+   "funcao": "prateleira",
+   "ids": [
+    "57537"
+   ],
+   "conflitos": [
+    "C01"
+   ],
+   "obs": [
+    "Sobre a porta"
+   ]
+  },
+  {
+   "code": "P21",
+   "mod": "M02",
+   "nome": "Prateleira interna com recuo",
+   "sel": "PT interna 18mm",
+   "funcao": "prateleira",
+   "ids": [
+    "57542",
+    "57543",
+    "57544"
+   ],
+   "conflitos": [
+    "C01"
+   ],
+   "obs": [
+    "Recuo 54 da frente"
+   ]
+  },
+  {
+   "code": "P22",
+   "mod": "M02",
+   "nome": "Porta de giro",
+   "sel": "Painel m",
+   "funcao": "frente",
+   "ids": [
+    "57541"
+   ],
+   "mdf_pdf": true,
+   "conflitos": [
+    "C01"
+   ],
+   "obs": [
+    "Dobradiças à direita"
+   ],
+   "furacao": "“Dir c/ furos” na lista {E} · lado direito {I} · eixos das dobradiças a 100 mm das bordas {C}"
+  }
+ ],
+ "hardware": {
+  "F01": {
+   "mod": "M01",
+   "sel": [
+    "CorE",
+    "CorD"
+   ],
+   "render": "box"
+  },
+  "F02": {
+   "mod": "M02",
+   "sel": [
+    "Dobradiça"
+   ],
+   "render": "mesh",
+   "mostrar_montado": false,
+   "vistas": false
+  },
+  "F03_M01": {
+   "mod": "M01",
+   "sel": [
+    "puxadores"
+   ],
+   "render": "mesh"
+  },
+  "F03_M02": {
+   "mod": "M02",
+   "sel": [
+    "puxadores"
+   ],
+   "render": "mesh"
+  }
+ },
+ "ferragens": [
+  {
+   "code": "F01",
+   "nome": "Corrediça invisível com amortecimento — 500 mm",
+   "qtd": "4 pares (8 peças)",
+   "origem_qtd": "E",
+   "aplicacao": "Gavetas do Módulo 01: laterais P01/P02 × corpo da gaveta (P09/P10)",
+   "origem": "Modelo: componente “Corrediça para gaveta” (desc = 500) × 4 gavetas; parâmetro do gaveteiro “Modelo de Corrediça” = Com Amortecimento.",
+   "obs": "Marca e referência não especificadas no projeto."
+  },
+  {
+   "code": "F02",
+   "nome": "Dobradiça — tipo “Normal” (sem amortecimento)",
+   "qtd": "2",
+   "origem_qtd": "E",
+   "aplicacao": "Porta P22 × lateral direita P15",
+   "origem": "Modelo: 2 dobradiças visíveis no componente da porta; camada visível “Dobradiça | Normal” (camada “Com Amortecimento” oculta).",
+   "obs": "Marca, ângulo de abertura e calço não especificados no projeto."
+  },
+  {
+   "code": "F03",
+   "nome": "Puxador",
+   "qtd": "5 (4 gavetas + 1 porta)",
+   "origem_qtd": "E",
+   "aplicacao": "Frentes P08 (4) e porta P22 (1)",
+   "origem": "Modelo: 1 puxador visível por frente/porta. PDF: “Puxador Gala 128 mm”. Modelo: Haste 192.",
+   "obs": "CONFLITO C03 — modelo do puxador a confirmar."
+  },
+  {
+   "code": "F04",
+   "nome": "Fixação da caixa (minifix, cavilha, parafuso ou outra)",
+   "qtd": "—",
+   "origem_qtd": "A",
+   "aplicacao": "União laterais × bases, travessas e rodapés",
+   "origem": "Ferragem não especificada no projeto. A lista de corte indica peças “c/ furos” (lido como furação de fábrica — inferido).",
+   "obs": "Ferragem não especificada no projeto."
+  },
+  {
+   "code": "F05",
+   "nome": "Fixação dos fundos (P07, P19, P13)",
+   "qtd": "—",
+   "origem_qtd": "A",
+   "aplicacao": "Fundos de 6 mm",
+   "origem": "Não identificada no modelo nem na lista de corte.",
+   "obs": "Ferragem não especificada no projeto."
+  },
+  {
+   "code": "F06",
+   "nome": "Suporte / fixação de prateleiras",
+   "qtd": "—",
+   "origem_qtd": "A",
+   "aplicacao": "P20 e P21",
+   "origem": "P20: parâmetro Gábster “Ferragem” = Sem ferragem. P21: não especificado.",
+   "obs": "Ferragem não especificada no projeto."
+  },
+  {
+   "code": "F07",
+   "nome": "Fixação do armário à parede",
+   "qtd": "—",
+   "origem_qtd": "A",
+   "aplicacao": "Módulo 02 (1950 mm de altura)",
+   "origem": "Não identificada no projeto.",
+   "obs": "Ferragem não especificada no projeto. Ver “Cuidados e recomendações”."
+  }
+ ],
+ "conflitos": [
+  {
+   "id": "C01",
+   "prioridade": "ALTA",
+   "titulo": "Quantidade do Módulo 02 (armário)",
+   "fontes": [
+    [
+     "Modelo 3D",
+     "1 armário, 1 porta de giro, 1 prateleira 15 mm, 3 prateleiras internas."
+    ],
+    [
+     "Lista de corte",
+     "Laterais, bases, rodapé e fundo do armário com qtd. 2; porta 294 × 294 com qtd. 3; prateleira 15 mm com qtd. 4; prateleiras internas 3 × 2 = 6."
+    ],
+    [
+     "PDF",
+     "Mostra 1 armário (folha 2)."
+    ]
+   ],
+   "tratamento": "Este manual descreve 1 armário, conforme o modelo. Confirmar com o pedido quantos armários, portas e prateleiras serão montados antes de iniciar."
+  },
+  {
+   "id": "C02",
+   "prioridade": "ALTA",
+   "titulo": "Espessura das frentes de gaveta (P08)",
+   "fontes": [
+    [
+     "PDF",
+     "Frentes — MDF Manhattan 15 mm."
+    ],
+    [
+     "Modelo 3D",
+     "4 frentes com 18,5 mm (espessura de modelagem de 18 mm)."
+    ],
+    [
+     "Lista de corte",
+     "2 frentes Manhattan 18 mm (ID 57552, 57565) e 2 frentes Manhattan 15 mm (ID 57573, 57581)."
+    ]
+   ],
+   "tratamento": "Não montar frentes de espessuras diferentes no mesmo gaveteiro sem confirmação. A posição de cada ID no gaveteiro não está definida no projeto."
+  },
+  {
+   "id": "C03",
+   "prioridade": "MÉDIA",
+   "titulo": "Modelo do puxador (F03)",
+   "fontes": [
+    [
+     "PDF",
+     "Puxador Gala 128 mm (nas duas folhas)."
+    ],
+    [
+     "Modelo 3D",
+     "Camadas visíveis: “Puxador de Frente de Gaveta | Haste 192” e “Puxador de Porta | Horizontal – Haste 192” (puxador de 202 mm, furação 192 mm)."
+    ]
+   ],
+   "tratamento": "A distância entre furos depende do puxador. Não furar frentes e porta antes de confirmar o modelo do puxador."
+  },
+  {
+   "id": "C04",
+   "prioridade": "MÉDIA",
+   "titulo": "Corpo da gaveta (P11, P12, P13)",
+   "fontes": [
+    [
+     "Modelo 3D",
+     "Frontal e traseiro do corpo 526 × 80,8 mm; fundo 526 × 500 mm, encaixado entre as laterais."
+    ],
+    [
+     "Lista de corte",
+     "Frontal e traseiro 526 × 98 mm; fundo 557 × 500 mm."
+    ]
+   ],
+   "tratamento": "As peças físicas seguem a lista de corte. A forma de fixação do fundo da gaveta não pode ser confirmada pelo modelo: confirmar com a produção."
+  },
+  {
+   "id": "C05",
+   "prioridade": "BAIXA",
+   "titulo": "Lado das dobradiças da porta (P22)",
+   "fontes": [
+    [
+     "Modelo 3D — geometria",
+     "Dobradiças no lado direito (vista frontal)."
+    ],
+    [
+     "Lista de corte",
+     "ID 57541: laminação “Lam. 4L Dir c/ furos”."
+    ],
+    [
+     "Modelo 3D — atributo",
+     "Parâmetro do componente Gábster “Porta Direita/Esquerda” = Esquerdo."
+    ]
+   ],
+   "tratamento": "O manual segue a geometria do modelo: dobradiças do lado DIREITO. O “Dir” da lista de corte é compatível, mas é uma interpretação (I). Confirmar antes de furar."
+  },
+  {
+   "id": "C06",
+   "prioridade": "BAIXA",
+   "titulo": "Recuo das prateleiras internas (P21)",
+   "fontes": [
+    [
+     "Lista de corte",
+     "Descrição “Prateleira Interna Recuo - 60”."
+    ],
+    [
+     "Modelo 3D",
+     "Borda frontal da prateleira a 54 mm da borda frontal das laterais (profundidade 540 mm)."
+    ]
+   ],
+   "tratamento": "Posicionar conforme a furação de fábrica. A medida de 54 mm é a do modelo."
+  },
+  {
+   "id": "C07",
+   "prioridade": "BAIXA",
+   "titulo": "Espessura nominal x modelo",
+   "fontes": [
+    [
+     "Lista de corte",
+     "Chapas de 15 mm e 18 mm (nome do material)."
+    ],
+    [
+     "Modelo 3D",
+     "Chapas modeladas com 15,5 mm e 18,5 mm."
+    ]
+   ],
+   "tratamento": "As cotas de posição deste manual vêm do modelo (15,5 / 18,5 mm). Diferenças de até 0,5 mm por chapa são esperadas."
+  },
+  {
+   "id": "C08",
+   "prioridade": "BAIXA",
+   "titulo": "Profundidade do gaveteiro (M01)",
+   "fontes": [
+    [
+     "PDF",
+     "Cota de profundidade 0,58 m (folha 1)."
+    ],
+    [
+     "Modelo 3D",
+     "Caixa com fundo 565 mm; com frentes 585,5 mm; com puxadores 608,5 mm."
+    ]
+   ],
+   "tratamento": "Nenhum valor do modelo corresponde exatamente a 0,58 m. Este manual usa as medidas do modelo. Confirmar a profundidade disponível no local."
+  }
+ ],
+ "info_gerais": {
+  "blocos": [
+   {
+    "titulo": "Sentido do veio",
+    "texto": "Não especificado no projeto {A}. A lista de corte não tem coluna de veio e nenhum parâmetro de veio foi identificado no modelo. Se o padrão da fábrica considerar a 1ª medida (Comp.) como sentido do veio, ele acompanha essa medida — confirmar com a produção antes de usar essa regra."
+   },
+   {
+    "titulo": "Ferragens",
+    "texto": "O modelo identifica corrediças, dobradiças e puxadores (seção 6). A ferragem de união da caixa, a fixação dos fundos e das prateleiras e a fixação à parede não estão especificadas {A}. As peças marcadas “c/ furos” na lista de corte devem sair com furação de fábrica {I}, mas a posição dos furos não está no modelo."
+   },
+   {
+    "titulo": "Tampo",
+    "texto": "O gaveteiro (M01) não tem tampo no projeto: no topo há apenas duas travessas de 70 mm (frontal e traseira), com vão aberto entre elas {E}."
+   },
+   {
+    "titulo": "Ferramentas",
+    "texto": "Não especificadas no projeto {A}."
+   }
+  ]
+ },
+ "explodidas": [
+  {
+   "mod": "M01",
+   "sub": "caixa",
+   "tamanho": [
+    200,
+    160
+   ],
+   "pecas": {
+    "P01": [
+     -330,
+     0,
+     0
+    ],
+    "P02": [
+     330,
+     0,
+     0
+    ],
+    "P03": [
+     0,
+     0,
+     0
+    ],
+    "P04": [
+     0,
+     -330,
+     -170
+    ],
+    "P05": [
+     0,
+     -200,
+     330
+    ],
+    "P06": [
+     0,
+     120,
+     330
+    ],
+    "P07": [
+     0,
+     560,
+     60
+    ]
+   },
+   "hw": [
+    {
+     "key": "F01",
+     "offset_lados": [
+      [
+       -270,
+       0,
+       0
+      ],
+      [
+       270,
+       0,
+       0
+      ]
+     ],
+     "sub": "×4 pares"
+    }
+   ],
+   "nota": "Gavetas na folha seguinte. As corrediças F01 aparecem junto às laterais, onde são fixadas."
+  },
+  {
+   "mod": "M01",
+   "sub": "gaveta (4 iguais)",
+   "tamanho": [
+    200,
+    160
+   ],
+   "inst": 0,
+   "pecas": {
+    "P09": [
+     -150,
+     0,
+     0
+    ],
+    "P10": [
+     150,
+     0,
+     0
+    ],
+    "P11": [
+     0,
+     -170,
+     0
+    ],
+    "P12": [
+     0,
+     200,
+     0
+    ],
+    "P13": [
+     0,
+     0,
+     -150
+    ],
+    "P08": [
+     0,
+     -420,
+     0
+    ]
+   },
+   "hw": [
+    {
+     "key": "F03_M01",
+     "idx": [
+      0
+     ],
+     "offset": [
+      0,
+      -520,
+      0
+     ],
+     "sub": "conflito C03"
+    },
+    {
+     "key": "F01",
+     "idx": [
+      0,
+      1
+     ],
+     "offset_lados": [
+      [
+       -290,
+       0,
+       0
+      ],
+      [
+       290,
+       0,
+       0
+      ]
+     ],
+     "sub": "1 par"
+    }
+   ],
+   "nota": "Desenho com as medidas do modelo. P11, P12 e P13 têm medidas diferentes na lista de corte (C04)."
+  },
+  {
+   "mod": "M02",
+   "tamanho": [
+    180,
+    162
+   ],
+   "pecas": {
+    "P14": [
+     -300,
+     0,
+     0
+    ],
+    "P15": [
+     300,
+     0,
+     0
+    ],
+    "P16": [
+     0,
+     0,
+     0
+    ],
+    "P17": [
+     0,
+     0,
+     260
+    ],
+    "P18": [
+     0,
+     0,
+     -330
+    ],
+    "P19": [
+     0,
+     520,
+     0
+    ],
+    "P20": [
+     0,
+     -380,
+     0
+    ],
+    "P21": [
+     0,
+     -330,
+     0
+    ],
+    "P22": [
+     0,
+     -760,
+     0
+    ]
+   },
+   "hw": [
+    {
+     "key": "F03_M02",
+     "offset": [
+      0,
+      -860,
+      0
+     ],
+     "sub": "conflito C03"
+    }
+   ],
+   "legenda": {
+    "pecas": [
+     "P14",
+     "P15",
+     "P16",
+     "P17",
+     "P18",
+     "P19",
+     "P20",
+     "P21",
+     "P22"
+    ],
+    "ferragens": [
+     "F02",
+     "F03"
+    ]
+   },
+   "nota": "Dobradiças F02 no lado direito da porta (não desenhadas nesta vista)."
+  }
+ ],
+ "etapas": [
+  {
+   "id": "E01",
+   "mod": "M01",
+   "titulo": "Estrutura: laterais e base inferior",
+   "mostrar": [],
+   "novas": [
+    "P01",
+    "P02",
+    "P03"
+   ],
+   "offsets": {
+    "P01": [
+     -260,
+     0,
+     0
+    ],
+    "P02": [
+     260,
+     0,
+     0
+    ]
+   },
+   "desc": "Una as laterais P01 e P02 à base inferior P03. A base fica entre as laterais, com a face inferior a 100 mm e a superior a 115,5 mm do piso {C}. Frente da base alinhada à frente das laterais {C}.",
+   "obs": "União: ferragem não especificada no projeto (F04) {A}. Peças “c/ furos” na lista: furação de fábrica {I}."
+  },
+  {
+   "id": "E02",
+   "mod": "M01",
+   "titulo": "Travessas superiores",
+   "mostrar": [
+    "P01",
+    "P02",
+    "P03"
+   ],
+   "novas": [
+    "P05",
+    "P06"
+   ],
+   "offsets": {
+    "P05": [
+     0,
+     0,
+     260
+    ],
+    "P06": [
+     0,
+     0,
+     260
+    ]
+   },
+   "desc": "Fixe a travessa frontal P05 e a traseira P06 no topo, entre as laterais. Face superior nivelada com o topo das laterais (750 mm) {C}. P05 alinhada à frente; P06 alinhada à borda traseira das laterais {C}.",
+   "obs": "O gaveteiro não possui tampo no projeto {E}."
+  },
+  {
+   "id": "E03",
+   "mod": "M01",
+   "titulo": "Rodapé",
+   "mostrar": [
+    "P01",
+    "P02",
+    "P03",
+    "P05",
+    "P06"
+   ],
+   "novas": [
+    "P04"
+   ],
+   "offsets": {
+    "P04": [
+     0,
+     -300,
+     0
+    ]
+   },
+   "desc": "Fixe o rodapé P04 sob a base, entre as laterais. Altura 100 mm {E}, recuado 12,5 mm da frente da caixa {C}.",
+   "obs": "Nivelamento: o projeto não prevê pés niveladores {A}."
+  },
+  {
+   "id": "E04",
+   "mod": "M01",
+   "titulo": "Fundo",
+   "mostrar": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06"
+   ],
+   "novas": [
+    "P07"
+   ],
+   "offsets": {
+    "P07": [
+     0,
+     380,
+     0
+    ]
+   },
+   "desc": "Posicione o fundo P07 nas costas do módulo, sobreposto às laterais: cobre 600 mm de largura, de 100 a 750 mm de altura {C}.",
+   "obs": "Conferir o esquadro (diagonais iguais) antes de fixar {I}. Fixação do fundo não especificada (F05) {A}."
+  },
+  {
+   "id": "E05",
+   "mod": "M01",
+   "titulo": "Corrediças nas laterais",
+   "mostrar": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07"
+   ],
+   "novas": [],
+   "hw_novas": [
+    {
+     "key": "F01",
+     "offset_lados": [
+      [
+       -200,
+       0,
+       0
+      ],
+      [
+       200,
+       0,
+       0
+      ]
+     ]
+    }
+   ],
+   "rotulos": {
+    "F01": "×4 pares"
+   },
+   "desc": "Fixe uma corrediça F01 (500 mm, com amortecimento) em cada lateral, para cada gaveta: 4 pares {E}. Altura da face inferior da corrediça no modelo, a partir do piso: 155,0 · 316,8 · 478,5 · 640,3 mm {C}.",
+   "obs": "A representação da corrediça no modelo é simplificada. Seguir o gabarito e a instrução do fabricante da corrediça {I}."
+  },
+  {
+   "id": "E06",
+   "mod": "M01",
+   "titulo": "Corpos das gavetas (×4)",
+   "mostrar": [],
+   "novas": [
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13"
+   ],
+   "inst": {
+    "P09": [
+     0
+    ],
+    "P10": [
+     0
+    ],
+    "P11": [
+     0
+    ],
+    "P12": [
+     0
+    ],
+    "P13": [
+     0
+    ]
+   },
+   "offsets": {
+    "P09": [
+     -170,
+     0,
+     0
+    ],
+    "P10": [
+     170,
+     0,
+     0
+    ],
+    "P11": [
+     0,
+     -200,
+     0
+    ],
+    "P12": [
+     0,
+     200,
+     0
+    ]
+   },
+   "desc": "Monte os 4 corpos de gaveta: laterais P09 e P10, frontal P11, traseiro P12 e fundo P13. No modelo, o fundo fica entre as laterais e o frontal/traseiro apoiam sobre ele {E}.",
+   "obs": "{!C04} Na lista de corte P11/P12 medem 526 × 98 e P13 557 × 500 (modelo: 526 × 80,8 e 526 × 500). Confirmar a fixação do fundo antes de montar."
+  },
+  {
+   "id": "E07",
+   "mod": "M01",
+   "titulo": "Instalação dos corpos nas corrediças",
+   "mostrar": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07"
+   ],
+   "novas": [
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13"
+   ],
+   "offsets": {
+    "P09": [
+     0,
+     -420,
+     0
+    ],
+    "P10": [
+     0,
+     -420,
+     0
+    ],
+    "P11": [
+     0,
+     -420,
+     0
+    ],
+    "P12": [
+     0,
+     -420,
+     0
+    ],
+    "P13": [
+     0,
+     -420,
+     0
+    ]
+   },
+   "hw_mostrar": [
+    "F01"
+   ],
+   "setas": [
+    "P13"
+   ],
+   "so_rotulos": [
+    "P13"
+   ],
+   "rotulos": {
+    "P13": "×4 corpos"
+   },
+   "desc": "Encaixe os 4 corpos nas corrediças. No modelo, a face inferior dos corpos fica a 120,5 · 282,3 · 444,0 · 605,8 mm do piso {C}.",
+   "obs": "Conferir deslizamento e fechamento de cada gaveta antes de fixar as frentes {I}."
+  },
+  {
+   "id": "E08",
+   "mod": "M01",
+   "titulo": "Frentes das gavetas",
+   "mostrar": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13"
+   ],
+   "novas": [
+    "P08"
+   ],
+   "offsets": {
+    "P08": [
+     0,
+     -260,
+     0
+    ]
+   },
+   "desc": "Fixe as frentes P08 nos corpos. Face inferior da 1ª frente a 103 mm do piso; frentes com 158,75 mm de altura; folga de 3 mm entre frentes e no topo; 3 mm de afastamento em cada lateral {C}.",
+   "obs": "{!C02} Espessura das frentes a confirmar (PDF 15 mm · modelo 18,5 mm · lista 2 × 18 + 2 × 15)."
+  },
+  {
+   "id": "E09",
+   "mod": "M01",
+   "titulo": "Puxadores das gavetas",
+   "mostrar": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P08"
+   ],
+   "novas": [],
+   "hw_novas": [
+    {
+     "key": "F03_M01",
+     "offset": [
+      0,
+      -160,
+      0
+     ]
+    }
+   ],
+   "rotulos": {
+    "F03": "×4"
+   },
+   "desc": "Instale um puxador F03 por frente. Centro do puxador: no centro da largura da frente (297 mm da borda) e a 83,4 mm da borda superior da frente {C}.",
+   "obs": "{!C03} Distância entre furos depende do puxador: 192 mm (modelo) ou 128 mm (Gala, PDF). Não furar antes de confirmar."
+  },
+  {
+   "id": "E10",
+   "mod": "M02",
+   "titulo": "Estrutura: laterais e bases",
+   "mostrar": [],
+   "novas": [
+    "P14",
+    "P15",
+    "P16",
+    "P17"
+   ],
+   "offsets": {
+    "P14": [
+     -240,
+     0,
+     0
+    ],
+    "P15": [
+     240,
+     0,
+     0
+    ]
+   },
+   "desc": "Una as laterais P14 e P15 à base inferior P16 (100 a 115,5 mm do piso) e à base superior P17 (1934,5 a 1950 mm, nivelada com o topo) {C}.",
+   "obs": "União: ferragem não especificada no projeto (F04) {A}. Peças “c/ furos” na lista: furação de fábrica {I}."
+  },
+  {
+   "id": "E11",
+   "mod": "M02",
+   "titulo": "Rodapé",
+   "mostrar": [
+    "P14",
+    "P15",
+    "P16",
+    "P17"
+   ],
+   "novas": [
+    "P18"
+   ],
+   "offsets": {
+    "P18": [
+     0,
+     -300,
+     0
+    ]
+   },
+   "desc": "Fixe o rodapé P18 sob a base inferior, entre as laterais. Altura 100 mm {E}, recuado 12,5 mm da frente {C}.",
+   "obs": "Nivelamento: o projeto não prevê pés niveladores {A}."
+  },
+  {
+   "id": "E12",
+   "mod": "M02",
+   "titulo": "Fundo",
+   "mostrar": [
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18"
+   ],
+   "novas": [
+    "P19"
+   ],
+   "offsets": {
+    "P19": [
+     0,
+     420,
+     0
+    ]
+   },
+   "desc": "Posicione o fundo P19 nas costas, sobreposto às laterais: 300 mm de largura, de 100 a 1950 mm de altura {C}.",
+   "obs": "Conferir o esquadro antes de fixar {I}. Fixação do fundo não especificada (F05) {A}."
+  },
+  {
+   "id": "E13",
+   "mod": "M02",
+   "titulo": "Prateleira 15 mm sobre a porta",
+   "mostrar": [
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19"
+   ],
+   "novas": [
+    "P20"
+   ],
+   "offsets": {
+    "P20": [
+     0,
+     -420,
+     0
+    ]
+   },
+   "desc": "Instale a prateleira P20 com a face inferior a 400,6 mm do piso, ocupando toda a profundidade (594 mm), alinhada à frente {C}. Ela fecha o vão da porta por cima.",
+   "obs": "Parâmetro do componente: “Ferragem = Sem ferragem” {E}. Fixação não especificada (F06) {A}."
+  },
+  {
+   "id": "E14",
+   "mod": "M02",
+   "titulo": "Prateleiras internas (×3)",
+   "mostrar": [
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20"
+   ],
+   "novas": [
+    "P21"
+   ],
+   "offsets": {
+    "P21": [
+     0,
+     -420,
+     0
+    ]
+   },
+   "desc": "Instale as 3 prateleiras P21 com a face inferior a 832,0 · 1199,5 · 1567,0 mm do piso, encostadas no fundo e recuadas 54 mm da frente {C}. Vão livre entre elas: 349 mm {C}.",
+   "obs": "Suporte de prateleira não especificado (F06) {A}."
+  },
+  {
+   "id": "E15",
+   "mod": "M02",
+   "titulo": "Porta e dobradiças",
+   "mostrar": [
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P21"
+   ],
+   "novas": [
+    "P22"
+   ],
+   "offsets": {
+    "P22": [
+     0,
+     -320,
+     0
+    ]
+   },
+   "desc": "Instale 2 dobradiças F02 na porta P22, no lado direito {E}, com eixos a 100 mm das bordas superior e inferior da porta {C}. Porta montada: borda inferior a 114,3 mm e superior a 408,3 mm do piso {C}.",
+   "obs": "Dobradiça tipo “Normal”, sem amortecimento {E}. Copo e distância à borda: não identificados no modelo {A}."
+  },
+  {
+   "id": "E16",
+   "mod": "M02",
+   "titulo": "Puxador da porta",
+   "mostrar": [
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P21",
+    "P22"
+   ],
+   "novas": [],
+   "hw_novas": [
+    {
+     "key": "F03_M02",
+     "offset": [
+      0,
+      -160,
+      0
+     ]
+    }
+   ],
+   "desc": "Instale o puxador F03 na porta, horizontal, com centro a 39 mm da borda superior e a 140 mm da borda esquerda da porta {C}.",
+   "obs": "{!C03} Confirmar o modelo do puxador antes de furar. No modelo, o puxador fica 7 mm à esquerda do centro da porta (147 mm) {C}."
+  }
+ ],
+ "detalhes": {
+  "portas": [
+   {
+    "porta": "P22",
+    "dobradicas": "F02",
+    "puxador": "F03_M02",
+    "contexto": [
+     "P14",
+     "P15",
+     "P16",
+     "P20",
+     "P18"
+    ],
+    "corte_z": 470,
+    "sub": "MÓDULO 02 — ARMÁRIO 1 PORTA · porta de giro P22 · vista frontal",
+    "linhas": [
+     [
+      "Porta",
+      "P22 — 294 × 294 × 15 mm, Manhattan {E}"
+     ],
+     [
+      "Lado das dobradiças",
+      "<b>Direito</b> (vista frontal) {E} · ver C05"
+     ],
+     [
+      "Dobradiças",
+      "F02 — 2 un., tipo “Normal” (sem amortecimento) {E}"
+     ],
+     [
+      "Eixos das dobradiças",
+      "100 mm da borda inferior e 100 mm da borda superior {C}"
+     ],
+     [
+      "Diâmetro / profundidade do copo",
+      "Não identificados no modelo {A}"
+     ],
+     [
+      "Distância do copo à borda",
+      "Não identificada no modelo {A}"
+     ],
+     [
+      "Posição da porta",
+      "Borda inferior 114,3 mm e superior 408,3 mm do piso {C}"
+     ],
+     [
+      "Sobreposição nas laterais",
+      "13,0 mm à esquerda · 12,0 mm à direita {C}"
+     ],
+     [
+      "Sobreposição na prateleira P20",
+      "7,8 mm (P20 a 400,6 mm) {C}"
+     ],
+     [
+      "Base inferior P16",
+      "borda frontal visível abaixo da porta: 14,3 mm {C}"
+     ]
+    ]
+   }
+  ],
+  "gavetas": [
+   {
+    "mod": "M01",
+    "sub": "MÓDULO 01 — GAVETEIRO 4 GAVETAS · vista frontal com cotas das frentes",
+    "linhas": [
+     [
+      "Gavetas",
+      "4, iguais {E}"
+     ],
+     [
+      "Corrediça",
+      "F01 — invisível com amortecimento, 500 mm, 1 par por gaveta {E}"
+     ],
+     [
+      "Frente",
+      "P08 — 594 × 158,75 mm no modelo (lista: 159 × 594) {E}"
+     ],
+     [
+      "Folga entre frentes",
+      "3 mm {C}"
+     ],
+     [
+      "Folga no topo",
+      "3 mm (topo da 4ª frente a 747 mm) {C}"
+     ],
+     [
+      "Afastamento lateral",
+      "3 mm de cada lado (frente 594 em caixa de 600) {C}"
+     ],
+     [
+      "1ª frente (inferior)",
+      "face inferior a 103 mm do piso {C}"
+     ],
+     [
+      "Frente × caixa",
+      "2 mm entre o verso da frente e a borda frontal da caixa {C}"
+     ],
+     [
+      "Espessura da frente",
+      "{!C02} PDF 15 · modelo 18,5 · lista 2 × 18 + 2 × 15"
+     ],
+     [
+      "Corpo da gaveta",
+      "{!C04} medidas da lista diferentes do modelo"
+     ]
+    ],
+    "ordem": [
+     "Instalar e testar os 4 corpos nas corrediças (E07).",
+     "Fixar a frente inferior a 103 mm do piso e conferir 3 mm de cada lado.",
+     "Fixar as demais frentes de baixo para cima, mantendo 3 mm entre elas.",
+     "Conferir 3 mm de folga no topo."
+    ]
+   }
+  ],
+  "puxadores": {
+   "sub": "F03 · posição do centro do puxador",
+   "itens": [
+    {
+     "painel": "P08",
+     "inst": 0,
+     "hw": "F03_M01",
+     "hw_idx": 0,
+     "legenda": "Frente de gaveta P08 · vista frontal · tracejado = puxador do modelo (202 mm)"
+    },
+    {
+     "painel": "P22",
+     "inst": 0,
+     "hw": "F03_M02",
+     "hw_idx": 0,
+     "legenda": "Porta P22 · vista frontal"
+    }
+   ],
+   "tabela": {
+    "cabecalho": [
+     "",
+     "Frentes de gaveta P08 (×4)",
+     "Porta P22 (×1)"
+    ],
+    "linhas": [
+     [
+      "Orientação",
+      "Horizontal {E}",
+      "Horizontal {E}"
+     ],
+     [
+      "Centro — horizontal",
+      "297 mm da borda esquerda (centro da frente) {C}",
+      "140 mm da borda esquerda {C}"
+     ],
+     [
+      "Centro — vertical",
+      "83,4 mm da borda superior da frente {C}",
+      "39 mm da borda superior da porta {C}"
+     ],
+     [
+      "Puxador no modelo",
+      "Haste 192 — comprimento 202 mm, furação 192 mm {E}"
+     ],
+     [
+      "Puxador especificado",
+      "Gala 128 mm (PDF, folhas 1 e 2) {E}"
+     ],
+     [
+      "Furos",
+      "{!C03} ±96 mm do centro (192) ou ±64 mm do centro (128), conforme o puxador confirmado. Diâmetro do furo e parafuso: não especificados {A}"
+     ]
+    ]
+   }
+  }
+ },
+ "regulagem": {
+  "intro": "Valores de referência calculados do modelo. Os procedimentos de regulagem dependem da marca da dobradiça e da corrediça, que não estão especificadas no projeto {A}.",
+  "linhas": [
+   [
+    "Frentes de gaveta",
+    "Folga de 3 mm entre frentes, 3 mm no topo e 3 mm em cada lateral",
+    "C",
+    "Regulagem conforme a corrediça (marca não especificada)"
+   ],
+   [
+    "Gavetas",
+    "Abrir e fechar as 4 gavetas por completo; conferir o amortecimento",
+    "E",
+    "Corrediça com amortecimento (parâmetro do modelo)"
+   ],
+   [
+    "Porta P22",
+    "Sobreposição: 13 mm na lateral esquerda, 12 mm na direita, 7,8 mm sobre P20",
+    "C",
+    "Regulagem conforme a dobradiça (marca não especificada)"
+   ],
+   [
+    "Porta P22",
+    "Fechamento sem tocar a base P16 nem a prateleira P20",
+    "I",
+    ""
+   ],
+   [
+    "Puxadores",
+    "Alinhados na horizontal e centrados conforme seção 12",
+    "C",
+    ""
+   ],
+   [
+    "Prateleiras",
+    "Niveladas; P21 com recuo de 54 mm em relação à frente das laterais",
+    "C",
+    ""
+   ],
+   [
+    "Nivelamento",
+    "Módulos apoiados no rodapé; pés niveladores não previstos no projeto",
+    "A",
+    "Calçar conforme o piso, se necessário"
+   ]
+  ]
+ },
+ "conferencia": [
+  [
+   "M01",
+   "Largura total da caixa",
+   "600 mm",
+   "E"
+  ],
+  [
+   "M01",
+   "Altura total",
+   "750 mm",
+   "E"
+  ],
+  [
+   "M01",
+   "Profundidade da caixa (com fundo)",
+   "565 mm",
+   "E"
+  ],
+  [
+   "M01",
+   "Profundidade com frentes",
+   "585,5 mm",
+   "C"
+  ],
+  [
+   "M01",
+   "Diagonais da frente da caixa",
+   "iguais",
+   "I"
+  ],
+  [
+   "M01",
+   "Folgas das frentes",
+   "3 mm",
+   "C"
+  ],
+  [
+   "M01",
+   "4 gavetas abrem e fecham com amortecimento",
+   "—",
+   "E"
+  ],
+  [
+   "M01",
+   "4 puxadores instalados",
+   "posição seção 12",
+   "C"
+  ],
+  [
+   "M02",
+   "Largura total",
+   "300 mm",
+   "E"
+  ],
+  [
+   "M02",
+   "Altura total",
+   "1950 mm",
+   "E"
+  ],
+  [
+   "M02",
+   "Profundidade da caixa (com fundo)",
+   "600 mm",
+   "E"
+  ],
+  [
+   "M02",
+   "Profundidade com porta",
+   "615,5 mm",
+   "C"
+  ],
+  [
+   "M02",
+   "Diagonais da frente da caixa",
+   "iguais",
+   "I"
+  ],
+  [
+   "M02",
+   "Prateleira P20 (face inferior)",
+   "400,6 mm do piso",
+   "C"
+  ],
+  [
+   "M02",
+   "Prateleiras P21 (faces inferiores)",
+   "832,0 · 1199,5 · 1567,0 mm",
+   "C"
+  ],
+  [
+   "M02",
+   "Porta abre e fecha; dobradiças à direita",
+   "—",
+   "E"
+  ],
+  [
+   "Geral",
+   "Conflitos C01 a C08 resolvidos com a produção",
+   "—",
+   ""
+  ],
+  [
+   "Geral",
+   "IDs das peças conferidos com o Anexo A",
+   "42 linhas",
+   "E"
+  ],
+  [
+   "Geral",
+   "Limpeza final e retirada de resíduos",
+   "—",
+   "I"
+  ]
+ ],
+ "cuidados": {
+  "colunas": [
+   [
+    {
+     "titulo": "Segurança",
+     "itens": [
+      "<b>Armário M02 (1950 × 300 × 600 mm):</b> módulo alto e estreito. Recomenda-se fixá-lo à parede para evitar tombamento. A ferragem de fixação não está especificada no projeto (F07) {A}.",
+      "Montar com duas pessoas ao levantar o armário.",
+      "Gavetas e porta: não usar como degrau ou apoio.",
+      "Carga máxima das prateleiras e gavetas: não especificada no projeto {A}."
+     ]
+    },
+    {
+     "titulo": "Durante a montagem",
+     "itens": [
+      "Conferir as peças recebidas com a lista de corte (Anexo A) antes de começar.",
+      "Montar sobre superfície limpa e protegida para não riscar as faces.",
+      "Não furar frentes e porta antes de resolver o conflito C03 (puxador).",
+      "Não montar as frentes antes de resolver o conflito C02 (espessura)."
+     ]
+    }
+   ],
+   [
+    {
+     "titulo": "Uso e limpeza (MDF)",
+     "itens": [
+      "Limpar com pano macio levemente úmido e secar em seguida.",
+      "Evitar produtos abrasivos, solventes e excesso de água, principalmente nas bordas e no rodapé.",
+      "Evitar exposição direta e prolongada ao sol e a fontes de calor.",
+      "Reapertar ferragens e regular dobradiças e corrediças se surgirem folgas com o uso."
+     ]
+    },
+    {
+     "titulo": "Pendências do projeto",
+     "itens": [
+      "C01 — quantidade de armários, portas e prateleiras.",
+      "C02 — espessura das frentes de gaveta.",
+      "C03 — modelo do puxador.",
+      "C04 — medidas do corpo da gaveta.",
+      "C08 — profundidade do gaveteiro."
+     ]
+    }
+   ]
+  ]
+ },
+ "auditoria": [
+  [
+   "Todas as peças foram identificadas?",
+   "Sim. 22 códigos cobrem as 42 linhas da lista de corte e todas as peças visíveis do modelo."
+  ],
+  [
+   "Todas as peças possuem código?",
+   "Sim. P01 a P22 e F01 a F07."
+  ],
+  [
+   "As quantidades estão corretas?",
+   "Conferidas no modelo. Divergem da lista de corte no Módulo 02 — conflito C01."
+  ],
+  [
+   "As medidas foram extraídas do modelo?",
+   "Sim, da geometria do .skp. Medidas de corte da lista exibidas lado a lado."
+  ],
+  [
+   "Existem peças duplicadas?",
+   "Não. Peças de mesma medida e função usam um único código com quantidade (P08–P13, P21). Em P08 a espessura diverge na lista de corte (C02)."
+  ],
+  [
+   "Existem peças sem identificação?",
+   "Não. Variantes ocultas do modelo foram descartadas (não fazem parte do móvel)."
+  ],
+  [
+   "As portas estão identificadas?",
+   "Sim. P22, com dobradiças F02 à direita."
+  ],
+  [
+   "As gavetas estão identificadas?",
+   "Sim. 4 gavetas: P08–P13 + F01 + F03."
+  ],
+  [
+   "As prateleiras estão identificadas?",
+   "Sim. P20 (15 mm) e P21 (18 mm, ×3)."
+  ],
+  [
+   "Os fundos estão identificados?",
+   "Sim. P07, P19 e P13."
+  ],
+  [
+   "As divisórias estão identificadas?",
+   "O projeto não tem divisórias verticais."
+  ],
+  [
+   "As ferragens estão identificadas?",
+   "Corrediças, dobradiças e puxadores sim. União da caixa, fundos, prateleiras e parede: não especificadas."
+  ],
+  [
+   "As vistas estão coerentes?",
+   "Sim. Todas geradas da mesma geometria."
+  ],
+  [
+   "As cotas estão coerentes?",
+   "Largura e altura conferem com o PDF (0,60 · 0,75 m e 0,30 · 1,95 m). A profundidade do gaveteiro diverge do PDF (0,58 m) — C08."
+  ],
+  [
+   "A vista explodida corresponde ao móvel montado?",
+   "Sim. Mesmas peças e posições, apenas deslocadas."
+  ],
+  [
+   "A sequência de montagem é lógica?",
+   "Sim, porém é sugerida: o projeto não define ordem de montagem."
+  ],
+  [
+   "Existem informações inventadas?",
+   "Não. Informações sem origem no projeto estão marcadas como Inferidas ou Ausentes."
+  ]
+ ]
+}
