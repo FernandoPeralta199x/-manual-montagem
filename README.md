@@ -10,6 +10,8 @@ O `.skp` é lido direto, sem SketchUp instalado: geometria de cada peça, camada
 
 Usado pelo comando `/manual-montagem` do Claude, que escreve o `spec.json` de cada pedido.
 
+Template: marca Luciano Lâminas. Por padrão o manual impresso não traz o aviso da capa, a página de conflitos, as listas de peças e de ferragens nem o Anexo B (campo `ocultar` do spec).
+
 ## Requisitos
 
 - Python 3.10+
@@ -47,6 +49,8 @@ mm/views.py      desenhos do manual
 mm/manual.py     montagem das folhas (16 seções + anexos)
 mm/assets/       CSS e fontes (Barlow, Barlow Condensed, IBM Plex Mono — SIL OFL)
 docs/SPEC.md     referência do spec.json
+docs/PROCEDIMENTO.md  passo a passo do comando /manual-montagem
+docs/SKILL.md    skill do Claude (inicializa e aponta para o procedimento)
 examples/74391/  spec do pedido 74391 (os arquivos do cliente não ficam no repositório)
 ```
 

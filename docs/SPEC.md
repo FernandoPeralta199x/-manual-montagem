@@ -11,12 +11,22 @@ Em qualquer texto do spec:
 | Marcação | Resultado |
 |---|---|
 | `{E}` `{C}` `{I}` `{A}` | Selo de origem: Encontrado, Calculado, Inferido, Ausente |
-| `{!C02}` | Destaque laranja "⚠ C02" |
+| `{!C02}` | Destaque laranja "⚠ C02" (só "⚠" quando a página de conflitos está oculta) |
+| `{sec:puxadores}` | "seção N" com o número atual da seção (chaves em `ocultar` abaixo) |
 | HTML simples (`<b>`, `<br>`) | Permitido |
 
 Regra: toda informação que não vem do modelo, da lista de corte ou do PDF leva `{I}` ou `{A}`. Nada é inventado.
 
 ## Campos
+
+### `ocultar`
+Itens que não vão para o manual impresso. Padrão do template (definido pelo usuário):
+```json
+"ocultar": ["aviso_capa", "conflitos", "lista_pecas", "ferragens", "auditoria"]
+```
+`"ocultar": []` imprime tudo. Chaves possíveis: `aviso_capa`, `conflitos`, `auditoria` e as seções `identificacao`, `info`, `montado`, `medidas`, `lista_pecas`, `ferragens`, `explodida`, `pecas`, `sequencia`, `portas`, `gavetas`, `puxadores`, `regulagem`, `conferencia`, `cuidados`, `final`. As seções visíveis são renumeradas em sequência.
+
+Com `conflitos` oculto, os códigos C0x não aparecem no manual: as divergências precisam estar escritas por extenso onde importam (observação da etapa, linha do detalhe, "Pendências do projeto" em cuidados) e os cartões das peças mostram "⚠ confirmar". Os campos `conflitos`, `ferragens` e `auditoria` do spec continuam obrigatórios: alimentam as checagens e o resumo enviado ao usuário.
 
 ### `marca`
 ```json

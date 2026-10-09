@@ -47,7 +47,7 @@
     "Fundo em MDF Branco 6 mm",
     "Sem tampo (travessas superiores)"
    ],
-   "nota_montado": "Puxadores conforme o modelo (ver conflito C03).",
+   "nota_montado": "Puxadores conforme o modelo; o modelo do puxador ainda deve ser confirmado (PDF: Gala 128 mm).",
    "nota_medidas": "<b>Cotas</b> em mm, calculadas da geometria do modelo {C}. Frentes: altura 158,75 (lista: 159) · folga entre frentes 3 · afastamento lateral 3. Rodapé recuado 12,5 da frente da caixa.",
    "cotas": {
     "cadeia_esquerda": [
@@ -81,7 +81,7 @@
     "3 prateleiras internas 18 mm com recuo",
     "Fundo em MDF Carvalho Natural 6 mm"
    ],
-   "nota_montado": "Puxador conforme o modelo (ver conflito C03).",
+   "nota_montado": "Puxador conforme o modelo; o modelo do puxador ainda deve ser confirmado (PDF: Gala 128 mm).",
    "nota_medidas": "<b>Cotas</b> em mm, calculadas da geometria do modelo {C}. Cota em cadeia à esquerda: alturas a partir do piso (rodapé 100). Vão livre entre prateleiras internas: 349. Recuo das prateleiras internas: 54.",
    "cotas": {
     "cadeia_esquerda": [
@@ -655,7 +655,7 @@
    },
    {
     "titulo": "Ferragens",
-    "texto": "O modelo identifica corrediças, dobradiças e puxadores (seção 6). A ferragem de união da caixa, a fixação dos fundos e das prateleiras e a fixação à parede não estão especificadas {A}. As peças marcadas “c/ furos” na lista de corte devem sair com furação de fábrica {I}, mas a posição dos furos não está no modelo."
+    "texto": "O modelo identifica corrediças, dobradiças e puxadores. A ferragem de união da caixa, a fixação dos fundos e das prateleiras e a fixação à parede não estão especificadas {A}. As peças marcadas “c/ furos” na lista de corte devem sair com furação de fábrica {I}, mas a posição dos furos não está no modelo."
    },
    {
     "titulo": "Tampo",
@@ -783,7 +783,7 @@
       -520,
       0
      ],
-     "sub": "conflito C03"
+     "sub": "a confirmar"
     },
     {
      "key": "F01",
@@ -806,7 +806,7 @@
      "sub": "1 par"
     }
    ],
-   "nota": "Desenho com as medidas do modelo. P11, P12 e P13 têm medidas diferentes na lista de corte (C04)."
+   "nota": "Desenho com as medidas do modelo. P11, P12 e P13 têm medidas diferentes na lista de corte: confirmar com a produção."
   },
   {
    "mod": "M02",
@@ -869,7 +869,7 @@
       -860,
       0
      ],
-     "sub": "conflito C03"
+     "sub": "a confirmar"
     }
    ],
    "legenda": {
@@ -916,7 +916,7 @@
     ]
    },
    "desc": "Una as laterais P01 e P02 à base inferior P03. A base fica entre as laterais, com a face inferior a 100 mm e a superior a 115,5 mm do piso {C}. Frente da base alinhada à frente das laterais {C}.",
-   "obs": "União: ferragem não especificada no projeto (F04) {A}. Peças “c/ furos” na lista: furação de fábrica {I}."
+   "obs": "União: ferragem não especificada no projeto {A}. Peças “c/ furos” na lista: furação de fábrica {I}."
   },
   {
    "id": "E02",
@@ -993,7 +993,7 @@
     ]
    },
    "desc": "Posicione o fundo P07 nas costas do módulo, sobreposto às laterais: cobre 600 mm de largura, de 100 a 750 mm de altura {C}.",
-   "obs": "Conferir o esquadro (diagonais iguais) antes de fixar {I}. Fixação do fundo não especificada (F05) {A}."
+   "obs": "Conferir o esquadro (diagonais iguais) antes de fixar {I}. Fixação do fundo não especificada {A}."
   },
   {
    "id": "E05",
@@ -1239,7 +1239,7 @@
     ]
    },
    "desc": "Una as laterais P14 e P15 à base inferior P16 (100 a 115,5 mm do piso) e à base superior P17 (1934,5 a 1950 mm, nivelada com o topo) {C}.",
-   "obs": "União: ferragem não especificada no projeto (F04) {A}. Peças “c/ furos” na lista: furação de fábrica {I}."
+   "obs": "União: ferragem não especificada no projeto {A}. Peças “c/ furos” na lista: furação de fábrica {I}."
   },
   {
    "id": "E11",
@@ -1286,7 +1286,7 @@
     ]
    },
    "desc": "Posicione o fundo P19 nas costas, sobreposto às laterais: 300 mm de largura, de 100 a 1950 mm de altura {C}.",
-   "obs": "Conferir o esquadro antes de fixar {I}. Fixação do fundo não especificada (F05) {A}."
+   "obs": "Conferir o esquadro antes de fixar {I}. Fixação do fundo não especificada {A}."
   },
   {
    "id": "E13",
@@ -1311,7 +1311,7 @@
     ]
    },
    "desc": "Instale a prateleira P20 com a face inferior a 400,6 mm do piso, ocupando toda a profundidade (594 mm), alinhada à frente {C}. Ela fecha o vão da porta por cima.",
-   "obs": "Parâmetro do componente: “Ferragem = Sem ferragem” {E}. Fixação não especificada (F06) {A}."
+   "obs": "Parâmetro do componente: “Ferragem = Sem ferragem” {E}. Fixação não especificada {A}."
   },
   {
    "id": "E14",
@@ -1337,7 +1337,7 @@
     ]
    },
    "desc": "Instale as 3 prateleiras P21 com a face inferior a 832,0 · 1199,5 · 1567,0 mm do piso, encostadas no fundo e recuadas 54 mm da frente {C}. Vão livre entre elas: 349 mm {C}.",
-   "obs": "Suporte de prateleira não especificado (F06) {A}."
+   "obs": "Suporte de prateleira não especificado {A}. A descrição da lista de corte indica “Recuo - 60”; a medida de 54 mm é a do modelo {C}."
   },
   {
    "id": "E15",
@@ -1418,7 +1418,7 @@
      ],
      [
       "Lado das dobradiças",
-      "<b>Direito</b> (vista frontal) {E} · ver C05"
+      "<b>Direito</b> (vista frontal) {E}. O parâmetro interno do componente Gábster indica “Esquerdo”: confirmar antes de furar {!C05}"
      ],
      [
       "Dobradiças",
@@ -1510,7 +1510,7 @@
    }
   ],
   "puxadores": {
-   "sub": "F03 · posição do centro do puxador",
+   "sub": "Posição do centro do puxador",
    "itens": [
     {
      "painel": "P08",
@@ -1594,7 +1594,7 @@
    ],
    [
     "Puxadores",
-    "Alinhados na horizontal e centrados conforme seção 12",
+    "Alinhados na horizontal e centrados conforme a {sec:puxadores}",
     "C",
     ""
    ],
@@ -1658,7 +1658,7 @@
   [
    "M01",
    "4 puxadores instalados",
-   "posição seção 12",
+   "posição: {sec:puxadores}",
    "C"
   ],
   [
@@ -1711,7 +1711,7 @@
   ],
   [
    "Geral",
-   "Conflitos C01 a C08 resolvidos com a produção",
+   "Pendências do projeto resolvidas com a produção ({sec:cuidados})",
    "—",
    ""
   ],
@@ -1734,7 +1734,7 @@
     {
      "titulo": "Segurança",
      "itens": [
-      "<b>Armário M02 (1950 × 300 × 600 mm):</b> módulo alto e estreito. Recomenda-se fixá-lo à parede para evitar tombamento. A ferragem de fixação não está especificada no projeto (F07) {A}.",
+      "<b>Armário M02 (1950 × 300 × 600 mm):</b> módulo alto e estreito. Recomenda-se fixá-lo à parede para evitar tombamento. A ferragem de fixação não está especificada no projeto {A}.",
       "Montar com duas pessoas ao levantar o armário.",
       "Gavetas e porta: não usar como degrau ou apoio.",
       "Carga máxima das prateleiras e gavetas: não especificada no projeto {A}."
@@ -1745,8 +1745,8 @@
      "itens": [
       "Conferir as peças recebidas com a lista de corte (Anexo A) antes de começar.",
       "Montar sobre superfície limpa e protegida para não riscar as faces.",
-      "Não furar frentes e porta antes de resolver o conflito C03 (puxador).",
-      "Não montar as frentes antes de resolver o conflito C02 (espessura)."
+      "Não furar frentes e porta antes de confirmar o modelo do puxador.",
+      "Não montar as frentes antes de confirmar a espessura com a produção."
      ]
     }
    ],
@@ -1763,11 +1763,11 @@
     {
      "titulo": "Pendências do projeto",
      "itens": [
-      "C01 — quantidade de armários, portas e prateleiras.",
-      "C02 — espessura das frentes de gaveta.",
-      "C03 — modelo do puxador.",
-      "C04 — medidas do corpo da gaveta.",
-      "C08 — profundidade do gaveteiro."
+      "Quantidade: o modelo tem 1 armário, 1 porta e 1 prateleira de 15 mm; a lista de corte traz armário ×2, porta ×3 e prateleira de 15 mm ×4.",
+      "Espessura das frentes de gaveta: PDF 15 mm · modelo 18 mm · lista de corte 2 × 18 mm + 2 × 15 mm.",
+      "Puxador: PDF Gala 128 mm · modelo haste 192 mm.",
+      "Corpo da gaveta: lista de corte 526 × 98 e fundo 557 × 500 · modelo 526 × 80,8 e fundo 526 × 500.",
+      "Profundidade do gaveteiro: PDF 0,58 m · modelo 565 mm (caixa) e 585,5 mm (com frentes)."
      ]
     }
    ]
