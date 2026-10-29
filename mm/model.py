@@ -49,10 +49,16 @@ def inventory(skp_path, csv_path=None):
         roots.append((i, ins, d))
     out.append('')
 
-    def csv_sugg(sz):
+    imap = item_map(m)
+    items_ok = bool(rows) and all(r.get('item') in imap.values() for r in rows)
+
+    def csv_sugg(sz, root_i=None):
         s = sorted(sz, reverse=True)
         res = []
-        for r in rows:
+        pool = rows
+        if items_ok and root_i is not None:
+            pool = [r for r in rows if r['item'] == imap.get(root_i)]
+        for r in pool:
             cor, marca, esp = material_info(r['mat'])
             dims = sorted([r['c'], r['l']], reverse=True)
             if esp is None:
@@ -66,6 +72,11 @@ def inventory(skp_path, csv_path=None):
             continue
         a = m.dc(ins, d)
         out.append('## Raiz [%d] %s' % (i, d['name']))
+        if items_ok and i in imap:
+            nr = sum(1 for r in rows if r['item'] == imap[i])
+            out.append('lista de corte: item %d → %d linha(s) (coluna 9 do CSV)' % (imap[i], nr))
+        elif rows and i not in imap:
+            out.append('não é componente Gábster: sem item na lista de corte')
         params = []
         for k in sorted(a):
             if k.startswith('_'):
@@ -100,17 +111,34 @@ def inventory(skp_path, csv_path=None):
             extra = '' if _base_name(dd['name']) == lab else ' {%s}' % dd['name']
             layer = m.layers.get(sub['layer'])
             layer = '' if layer in (None, 'Layer0', 'Layer00') else ' camada=%s' % layer
-            sg = csv_sugg(sz)
+            sg = csv_sugg(sz, root_i)
             lines.append('%s- %s%s%s · %s em %s%s' % ('  ' * depth, lab, extra, layer, sz, _rnd(bb[0]), ('  ≈ CSV ' + '; '.join(sg[:4])) if sg else ''))
             return True
+        root_i = i
         m.walk(fn, d, tm_(ins), (m.label(ins, d),), True)
         out += lines
         out.append('')
     if rows:
-        out.append('## Lista de corte (%d linhas)' % len(rows))
+        out.append('## Lista de corte (%d linhas) — item = componente Gábster da raiz%s' % (len(rows), '' if items_ok else ' (ATENÇÃO: itens não conferem com o modelo)'))
         for r in rows:
-            out.append('%3d · ID %s · %s × %s · %s · %s · %s · qtd %d' % (r['seq'], r['id'], r['c'], r['l'], r['mat'], r['desc'], r['lam'] or '-', r['qtd']))
+            out.append('%3d · ID %s · %s × %s · %s · %s · %s · qtd %d · item %s' % (r['seq'], r['id'], r['c'], r['l'], r['mat'], r['desc'], r['lam'] or '-', r['qtd'], r.get('item')))
     return '\n'.join(out)
+
+
+_GBS_NAME = re.compile(r'^\{\d+(?:\.\d+)?\}')
+
+
+def item_map(m):
+    """Raiz → nº do item na lista de corte (coluna 9): ordem dos componentes Gábster visíveis na raiz."""
+    res, n = {}, 0
+    for i, ins in enumerate(m.rootdef['insts']):
+        d = m.defs[ins['defid']]
+        if m.is_hidden(ins):
+            continue
+        if _GBS_NAME.match(d['name']) or any(k.startswith('gbs') for k in m.dc(ins, d)):
+            n += 1
+            res[i] = n
+    return res
 
 
 def tm_(ins):
@@ -132,7 +160,7 @@ class Project:
         self.warnings = []
         self._extract()
 
-    def _module_roots(self, mod):
+    def _module_roots(self, mod, with_index=False):
         m = self.skp
         roots = []
         for i, ins in enumerate(m.rootdef['insts']):
@@ -140,7 +168,7 @@ class Project:
             lab = m.label(ins, d)
             for r in mod['raizes']:
                 if (isinstance(r, int) and r == i) or (isinstance(r, str) and (r in d['name'] or r == lab)):
-                    roots.append((ins, d))
+                    roots.append((i, ins, d) if with_index else (ins, d))
                     break
         return roots
 
@@ -183,6 +211,7 @@ class Project:
         S = self.spec
         self.mods = {mod['id']: mod for mod in S['modulos']}
         self.roots = {mid: self._module_roots(mod) for mid, mod in self.mods.items()}
+        self.root_idx = {mid: {i for i, _, _ in self._module_roots(mod, True)} for mid, mod in self.mods.items()}
         for mid, r in self.roots.items():
             if not r:
                 self.warnings.append('Módulo %s: nenhuma raiz encontrada para %r' % (mid, self.mods[mid]['raizes']))
@@ -218,7 +247,7 @@ class Project:
             q = dict(p)
             q.pop('items')
             q.update(boxes=boxes,
-                     csv=[dict(id=r['id'], c=r['c'], l=r['l'], mat=r['mat'], lam=r['lam'], qtd=r['qtd'], desc=r['desc']) for r in rows],
+                     csv=[dict(id=r['id'], c=r['c'], l=r['l'], mat=r['mat'], lam=r['lam'], qtd=r['qtd'], item=r.get('item'), desc=r['desc']) for r in rows],
                      cor=mats[0][0] if mats else p.get('cor', ''),
                      esp_csv=sorted(set(x[2] for x in mats if x[2] is not None)),
                      qtd_csv=sum(r['qtd'] for r in rows), qtd_modelo=len(boxes),
@@ -254,6 +283,16 @@ class Project:
                 out.append(('ERRO', 'Linha da lista de corte sem código: ID %s (%s)' % (r['id'], r['desc'])))
             elif len(used[r['id']]) > 1:
                 out.append(('ERRO', 'ID %s associado a mais de um código: %s' % (r['id'], used[r['id']])))
+        imap = item_map(self.skp)
+        if self.csv and all(r.get('item') in imap.values() for r in self.csv):
+            # coluna 9 do CSV = item (componente Gábster da raiz): a linha deve pertencer a uma raiz do módulo
+            raiz_de = {v: k for k, v in imap.items()}
+            for p in self.parts:
+                ok = {imap.get(i) for i in self.root_idx.get(p['mod'], set())}
+                for r in p['csv']:
+                    if r['item'] not in ok:
+                        out.append(('AVISO', '%s %s: ID %s é do item %d da lista (raiz [%d]), que não está nas raízes do módulo %s' % (
+                            p['code'], p['nome'], r['id'], r['item'], raiz_de[r['item']], p['mod'])))
         for p in self.parts:
             if p['qtd_modelo'] != p['qtd_csv']:
                 out.append(('DIVERGE', '%s %s: qtd. modelo %d × lista %d' % (p['code'], p['nome'], p['qtd_modelo'], p['qtd_csv'])))

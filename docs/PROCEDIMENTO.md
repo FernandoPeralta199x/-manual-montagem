@@ -34,6 +34,7 @@ Se faltar o `.skp` ou o `.csv`, peça antes de começar.
 2. Leia o PDF de venda: `pdftotext -layout` e, para as cotas e o desenho, `pdftoppm -r 110 -png` e veja as páginas.
 3. Leia a lista de corte completa (está no fim do inventário).
 4. Cruze tudo: módulos, peças, quantidades, medidas, espessuras, materiais, puxador, dobradiças, corrediças. Anote cada divergência.
+   - Colunas do CSV: 2ª = quantidade da linha; 9ª = **item** (nº do componente Gábster na raiz, na ordem do inventário; ex.: item 7 = 7º componente Gábster). A 9ª coluna **não é quantidade**. O inventário já filtra as sugestões `≈ CSV` pelo item de cada raiz, e o `checar` avisa se um ID for ligado a um módulo que não é o do seu item.
 5. Envie ao usuário (SendUserMessage) um resumo curto: módulos encontrados e os conflitos principais. Ele pode responder algum ponto enquanto você continua.
 
 ### 3. Escrever o spec.json

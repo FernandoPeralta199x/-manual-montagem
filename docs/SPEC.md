@@ -65,7 +65,7 @@ A origem de cada módulo é o canto frontal-esquerdo da caixa (peças com `funca
 | `nome` | Nome no manual |
 | `sel` | Nome do componente no modelo (rótulo `_name` do Gábster, ou nome da definição sem `#nn`). Pode ser lista, ou `{"nome": "...", "caminho": "trecho do caminho"}` para desambiguar |
 | `funcao` | `caixa`, `fundo`, `frente`, `gaveta`, `prateleira`, `divisoria`, `outro`. `frente` ativa as medidas de folga/puxador/dobradiça |
-| `ids` | IDs da lista de corte (8ª coluna do CSV) desta peça |
+| `ids` | IDs da lista de corte (8ª coluna do CSV) desta peça. A 2ª coluna é a quantidade da linha; a 9ª é o **item** (nº do componente Gábster na raiz do modelo, na ordem do inventário) — não é quantidade |
 | `mdf_pdf` | `true` se o PDF especifica MDF para esta peça |
 | `conflitos` | IDs de conflito citados nos alertas automáticos (`["C01"]`) |
 | `alerta_espessura` | Força alerta de espessura |
