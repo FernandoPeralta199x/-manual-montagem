@@ -52,10 +52,12 @@ def esc(s):
 
 
 def fmt(v):
-    """mm value formatted pt-BR (comma decimal), max 1 decimal"""
-    if abs(v - round(v)) < 0.05:
+    """mm em pt-BR (vírgula decimal): inteiro, 1 ou 2 casas (158,75 não vira 158,8)"""
+    if abs(v - round(v)) < 0.005:
         return '%d' % round(v)
-    return ('%.1f' % v).replace('.', ',')
+    if abs(v * 10 - round(v * 10)) < 0.005:
+        return ('%.1f' % v).replace('.', ',')
+    return ('%.2f' % v).replace('.', ',')
 
 
 class Obj:
@@ -555,7 +557,7 @@ class Ortho:
             pa, pb = T(a), T(b)
             out.append('<line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="%s" stroke-width="0.2" stroke-dasharray="4 1 0.8 1"/>' % (pa[0], pa[1], pb[0], pb[1], ACCENT))
             if lab:
-                out.append('<text x="%.2f" y="%.2f" font-size="2.4" fill="%s" font-weight="600" text-anchor="end">%s</text>' % (pa[0] - 1, pa[1] + 0.8, ACCENT, esc(lab)))
+                out.append('<text x="%.2f" y="%.2f" font-size="2.4" fill="%s" font-weight="600" text-anchor="end">%s</text>' % (pa[0] - 1, pa[1] - 1.0, ACCENT, esc(lab)))
         for (a, b, orient, off, text) in self.dims:
             out.append(self._dim(a, b, orient, off, text))
         for (p, text, dx, dy) in self.notes:

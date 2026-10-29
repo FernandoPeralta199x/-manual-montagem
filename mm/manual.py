@@ -118,6 +118,10 @@ class Manual:
     def page(self, section, html, mod='', cls=''):
         self.pages.append((section, mod, html, cls))
 
+    def alerta(self, m):
+        a = m.get('alerta_altura')
+        return (' <span class="warn">⚠ %s</span>' % esc(a)) if a else ''
+
     def modlabel(self, mid):
         m = self.pj.mods[mid]
         return m.get('rotulo') or ('MÓDULO %s — %s' % (mid[1:], m['nome'].upper()))
@@ -165,13 +169,14 @@ class Manual:
             tall = (hi[2] - lo[2]) > 1.6 * (hi[0] - lo[0])
             mods += '''<div class="modcard"><div class="mc-head"><span class="mono">%s</span> %s</div><div class="mc-body"><div class="mc-fig">%s</div><div class="mc-txt">
 <p class="mc-sub">%s</p><table class="kv">
-%s<tr><th>Largura × prof. × altura (caixa)</th><td class="mono">%s × %s × %s mm %s</td></tr>
+%s<tr><th>%s</th><td class="mono">%s × %s × %s mm %s%s</td></tr>
 <tr><th>Profundidade com frentes</th><td class="mono">%s mm %s</td></tr>
 <tr><th>Componente no modelo</th><td>%s</td></tr>
 <tr><th>Especificação (PDF)</th><td>%s</td></tr></table></div></div></div>''' % (
                 mid, esc(m['nome'].upper()), assembled(pj, mid, 46, 58 if tall else 62, dims=False), tx(m.get('sub', '')),
                 ('<tr><th>Quantidade</th><td>%s</td></tr>' % tx(m.get('qtd_texto') or '%d unidades iguais {E}' % pj.unidades(mid))) if pj.unidades(mid) > 1 else '',
-                F(hi[0] - lo[0]), F(hi[1] - lo[1]), F(hi[2] - lo[2]), tg('E'), F(hi[1] - flo[1]), tg('C'),
+                esc(m.get('rotulo_dims', 'Largura × prof. × altura (caixa)')),
+                F(hi[0] - lo[0]), F(hi[1] - lo[1]), F(hi[2] - lo[2]), tg('C'), self.alerta(m), F(hi[1] - flo[1]), tg('C'),
                 tx(m.get('gabster', '—')), '<br>'.join(tx(x) for x in m.get('pdf_spec', [])) or tx('Não informado {A}'))
         html = h1(self.n('identificacao'), 'Identificação do projeto') + '''<div class="cols2"><div><h3>Projeto</h3><table class="kv big">%s</table>
 <h3>Arquivos de origem</h3><table class="kv">%s</table></div><div><h3>Módulos do projeto</h3>%s</div></div>''' % (
@@ -226,14 +231,14 @@ class Manual:
             tall = (hi[2] - lo[2]) > 1.6 * (hi[0] - lo[0])
             svg = assembled(pj, mid, 150 if tall else 190, 158)
             txt = '''<h3>%s</h3><p class="muted">%s</p><table class="kv">
-%s<tr><th>Largura</th><td class="mono">%s mm %s</td></tr><tr><th>Altura</th><td class="mono">%s mm %s</td></tr>
+%s<tr><th>Largura</th><td class="mono">%s mm %s</td></tr><tr><th>%s</th><td class="mono">%s mm %s%s</td></tr>
 <tr><th>Profundidade da caixa</th><td class="mono">%s mm %s</td></tr><tr><th>Profundidade com frente</th><td class="mono">%s mm %s</td></tr>
 <tr><th>Profundidade com ferragens</th><td class="mono">%s mm %s</td></tr></table>
 <h3>Componentes visíveis</h3><ul class="tight">%s</ul>
 <p class="note">Desenho gerado a partir da geometria do arquivo SketchUp.%s</p>''' % (
                 esc(m['nome']), tx(m.get('sub', '')),
                 ('<tr><th>Quantidade</th><td>%s</td></tr>' % tx(m.get('qtd_texto') or '%d unidades iguais {E}' % pj.unidades(mid))) if pj.unidades(mid) > 1 else '',
-                F(hi[0] - lo[0]), tg('E'), F(hi[2] - lo[2]), tg('E'), F(hi[1] - lo[1]), tg('E'),
+                F(hi[0] - lo[0]), tg('C'), esc(m.get('rotulo_altura', 'Altura')), F(hi[2] - lo[2]), tg('C'), self.alerta(m), F(hi[1] - lo[1]), tg('C'),
                 F(hi[1] - flo[1]), tg('C'), F(hi[1] - hlo[1]), tg('C'), ''.join('<li>%s</li>' % tx(c) for c in m.get('componentes', [])), tx(' ' + m['nota_montado']) if m.get('nota_montado') else '')
             self.page(self.lab('montado'), h1(self.n('montado'), 'Vista do móvel montado', self.modlabel(mid)) + '<div class="fig-side"><div class="fig">%s</div><div class="side">%s</div></div>' % (svg, txt), mid)
 
@@ -341,13 +346,18 @@ class Manual:
         viewname = {'lateral': 'vista lateral', 'frontal': 'vista frontal', 'superior': 'vista superior'}[view]
         qm, qc = p['qtd_modelo'], p['qtd_csv']
         cref = self.cref(p) or ('confirmar' if not self.show('conflitos') else '')
-        lam_code = re.sub(r'\s*(c/ furos|Dir|Esq)\b', '', lam.replace('Lam.', 'Lam')).strip() or '—'
+        lam_code = re.sub(r'\s*\([^)]*\)', '', re.sub(r'\s*(c/ furos|Dir|Esq)\b', '', lam.replace('Lam.', 'Lam'))).strip() or '—'
+        dm = p['dim_modelo']
+        if p['csv']:  # medidas do modelo na mesma ordem da lista (Comp. × Larg.)
+            c0, l0 = p['csv'][0]['c'], p['csv'][0]['l']
+            if abs(c0 - dm[1]) + abs(l0 - dm[0]) < abs(c0 - dm[0]) + abs(l0 - dm[1]):
+                dm = [dm[1], dm[0], dm[2]]
         rows = [
             ('Corte (lista)', '<span class="mono">%s × %s × %s</span> %s' % (p['csv'][0]['c'] if p['csv'] else '—', p['csv'][0]['l'] if p['csv'] else '—', esp, tg('E'))),
-            ('Modelo 3D', '<span class="mono">%s × %s × %s</span> %s%s' % (F(p['dim_modelo'][0]), F(p['dim_modelo'][1]), F(p['dim_modelo'][2]), tg('E'), (' <span class="warn">⚠ %s</span>' % (cref or 'diverge')) if warn else '')),
+            ('Modelo 3D', '<span class="mono">%s × %s × %s</span> %s%s' % (F(dm[0]), F(dm[1]), F(dm[2]), tg('E'), (' <span class="warn">⚠ %s</span>' % (cref or 'diverge')) if warn else '')),
             ('Quantidade', 'modelo <b>%d</b>%s · lista <b>%d</b>%s' % (qm, (' (%d por %s)' % (p['qtd_unid'], esc(pj.mods[p['mod']].get('nome_unidade', 'módulo')))) if p.get('unidades', 1) > 1 else '', qc, (' <span class="warn">⚠ %s</span>' % (cref or 'diverge')) if qm != qc else '')),
-            ('Chapa', esc(self.chapa(p)) + ((' <span class="warn">⚠ %s</span>' % (cref or 'confirmar')) if (len(p['esp_csv']) > 1 or p.get('alerta_espessura')) else '')),
-            ('Fita', '%s %s · %s %s' % (esc(lam_code), tg('E'), lam_expand(lam), tg('I'))),
+            ('Chapa', esc(self.chapa(p)) + ((' <span class="warn">⚠ %s</span>' % (cref or 'confirmar')) if (len(p['esp_csv']) > 1 or p.get('alerta_espessura') or p.get('alerta_chapa')) else '')),
+            ('Fita', tx(p['fita']) if p.get('fita') else '%s %s · %s %s' % (esc(lam_code), tg('E'), lam_expand(lam), tg('I'))),
             ('ID lista', ('<span class="mono idl">%s</span>' if len(p['csv']) > 6 else '<span class="mono">%s</span>') % (' ' if len(p['csv']) > 6 else ' · ').join(x['id'] for x in p['csv'])),
             ('Furação', tx(p.get('furacao') or ('“c/ furos” na lista {E} · furação de fábrica {I} · posição não identificada no modelo {A}' if furos else 'Sem indicação na lista {E} · não identificada no modelo {A}'))),
             ('Recortes', tx(p.get('recortes') or 'Não identificados no modelo {A}')),
@@ -475,8 +485,8 @@ class Manual:
         P = self.PJ
         tb = '''<table class="titleblock"><tr>%s<th>Cliente</th><td>%s</td><th>Código</th><td class="mono">%s</td><th>Pedido</th><td class="mono">%s</td><th>Data venda</th><td class="mono">%s</td></tr>
 <tr><th>Conteúdo</th><td colspan="3">%s — vistas frontal e lateral direita</td><th>Unidade</th><td>mm</td><th>Escala</th><td>sem escala — usar as cotas</td></tr>
-<tr><th>Fonte</th><td colspan="7">Geometria do modelo SketchUp (%s). Cotas %s. Vistas de cada módulo na mesma escala entre si.</td></tr></table>''' % (
-            ('<td rowspan="3" class="tb-logo">%s</td>' % self.logo()) if self.logo() else '', esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), esc(P.get('data_venda', '—')), ' · '.join('%s %s' % (m, esc(pj.mods[m]['nome'])) for m in mids), esc(P['arquivos']['skp']), tg('E'))
+<tr><th>Fonte</th><td colspan="7">Geometria do modelo SketchUp (%s). Cotas %s. Vistas de cada módulo na mesma escala entre si.</td></tr></table>''' % (  # cotas: calculadas da geometria
+            ('<td rowspan="3" class="tb-logo">%s</td>' % self.logo()) if self.logo() else '', esc(P['cliente']), esc(P['codigo']), esc(P.get('pedido', '—')), esc(P.get('data_venda', '—')), ' · '.join('%s %s' % (m, esc(pj.mods[m]['nome'])) for m in mids), esc(P['arquivos']['skp']), tg('C'))
         self.page(self.lab('final'), h1(self.n('final'), 'Desenho técnico final') + '<div class="final2"><div class="frow">%s</div>%s</div>' % (groups, tb))
 
     # ------------------------------------------------------------ anexos
@@ -486,16 +496,16 @@ class Manual:
         half = (len(rows) + 1) // 2
 
         def tbl(rs):
-            return '<table class="grid csvt"><thead><tr><th>Seq.</th><th>ID</th><th>Descrição (lista de corte)</th><th>C</th><th>L</th><th>Material</th><th>Qtd.</th><th>Código</th></tr></thead><tbody>%s</tbody></table>' % ''.join(
-                '<tr><td class="num">%d</td><td class="mono">%s</td><td class="small">%s</td><td class="num">%d</td><td class="num">%d</td><td class="small">%s</td><td class="num">%d</td><td class="mono b">%s</td></tr>' % (
-                    r['seq'], r['id'], esc(r['desc'].replace('Etiq.', '')), r['c'], r['l'], esc(r['mat']), r['qtd'], code_of.get(r['id'], '<span class="warn">—</span>')) for r in rs)
+            return '<table class="grid csvt"><thead><tr><th>Seq.</th><th>ID</th><th>Item</th><th>Descrição (lista de corte)</th><th>C</th><th>L</th><th>Material</th><th>Qtd.</th><th>Código</th></tr></thead><tbody>%s</tbody></table>' % ''.join(
+                '<tr><td class="num">%d</td><td class="mono">%s</td><td class="num">%s</td><td class="small">%s</td><td class="num">%d</td><td class="num">%d</td><td class="small">%s</td><td class="num">%d</td><td class="mono b">%s</td></tr>' % (
+                    r['seq'], r['id'], r.get('item') or '—', esc(r['desc'].replace('Etiq.', '')), r['c'], r['l'], esc(r['mat']), r['qtd'], code_of.get(r['id'], '<span class="warn">—</span>')) for r in rs)
         max_col = 33  # linhas por coluna que cabem na folha
         n_pg = max(1, -(-len(rows) // (max_col * 2)))
         per = -(-len(rows) // (n_pg * 2))  # distribui por igual entre as folhas
         for k in range(0, len(rows), per * 2):
             chunk = rows[k:k + per * 2]
             h = (len(chunk) + 1) // 2
-            self.page('Anexo A', h1('A', 'Anexo A — Rastreabilidade da lista de corte', 'As %d linhas do CSV associadas aos códigos deste manual {E} · caracteres corrompidos no arquivo original exibidos como “·”' % len(rows)) + '<div class="cols2 tight">%s%s</div>' % (tbl(chunk[:h]), tbl(chunk[h:])))
+            self.page('Anexo A', h1('A', 'Anexo A — Rastreabilidade da lista de corte', 'As %d linhas do CSV associadas aos códigos deste manual {E} · Item = nº do componente na lista (9ª coluna)' % len(rows) + (' · caracteres corrompidos no arquivo original exibidos como “·”' if any(r.get('corr') for r in rows) else '')) + '<div class="cols2 tight">%s%s</div>' % (tbl(chunk[:h]), tbl(chunk[h:])))
 
     def anexo_b(self):
         if not self.show('auditoria'):

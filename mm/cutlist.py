@@ -37,10 +37,11 @@ def read_csv(path):
     for r in csv.reader(io.StringIO(txt), delimiter=';'):
         if not r or not r[0].strip():
             continue
+        corr = any('·' in x for x in r)  # caractere ilegível no arquivo original
         try:
             rows.append(dict(seq=int(r[0]), c=int(float(r[2])), l=int(float(r[3])), mat=r[4].strip(), desc=r[5].strip(),
                              lam=r[6].strip(), id=r[7].strip(), qtd=int(float(r[1])), item=_int(r[8]),
-                             pedido=r[9].strip() if len(r) > 9 else ''))
+                             pedido=r[9].strip() if len(r) > 9 else '', corr=corr))
         except (ValueError, IndexError):
             continue
     return rows
@@ -58,7 +59,7 @@ def material_info(mat):
 
 
 def lam_expand(lam):
-    l = lam.replace('Lam.', 'Lam').replace(' c/ furos', '').replace(' Dir', '').replace(' Esq', '').strip()
+    l = re.sub(r'\s*\([^)]*\)', '', lam.replace('Lam.', 'Lam').replace(' c/ furos', '').replace(' Dir', '').replace(' Esq', '')).strip()
     m = {'Lam 1C': '1 lado do comprimento', 'Lam 2C': '2 lados do comprimento', 'Lam 1C e 2L': '1 comprimento + 2 larguras',
          'Lam 1C e 1L': '1 comprimento + 1 largura', 'Lam 2C e 1L': '2 comprimentos + 1 largura', 'Lam 2C e 2L': '4 lados',
          'Lam 4L': '4 lados', 'Lam 1L': '1 lado da largura', 'Lam 2L': '2 lados da largura', '': 'sem fita'}

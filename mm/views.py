@@ -233,7 +233,8 @@ def part_svg(pj, code, W, H):
         out.append('<text x="%.2f" y="%.2f" font-size="2.3" font-weight="700" fill="%s" text-anchor="middle" transform="rotate(-90 %.2f %.2f)">FRENTE</text>' % (x0 + 2.6, y0 + h / 2, ACCENT, x0 + 2.6, y0 + h / 2))
     elif front == 'bottom':
         out.append('<line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="%s" stroke-width="1.1"/>' % (x0, y0 + h, x0 + w, y0 + h, ACCENT))
-        out.append('<text x="%.2f" y="%.2f" font-size="2.3" font-weight="700" fill="%s" text-anchor="middle">FRENTE</text>' % (x0 + w / 2, y0 + h - 1.6, ACCENT))
+        fy = y0 + h - 1.6 if h >= 7 else y0 + h + 3.0  # peça fina: rótulo abaixo da borda
+        out.append('<text x="%.2f" y="%.2f" font-size="2.3" font-weight="700" fill="%s" text-anchor="middle">FRENTE</text>' % (x0 + w / 2, fy, ACCENT))
     wh, wv = abs(hc - hm) > 1.5, abs(vc - vm) > 1.5
     yy = y0 + h + 5.0
     out.append('<line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="%s" stroke-width="0.13"/>' % (x0, y0 + h + 0.8, x0, yy + 1.2, INK))
@@ -245,7 +246,10 @@ def part_svg(pj, code, W, H):
     out.append('<line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="%s" stroke-width="0.13"/>' % (x0 - 0.8, y0 + h, xx - 1.2, y0 + h, INK))
     out.append('<line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="%s" stroke-width="0.2" marker-start="url(#ph)" marker-end="url(#ph)"/>' % (xx, y0, xx, y0 + h, INK))
     tx, ty = xx - 1.6, y0 + h / 2
-    out.append('<text x="%.2f" y="%.2f" font-size="3.2" font-weight="700" text-anchor="middle" fill="%s" transform="rotate(-90 %.2f %.2f)">%s</text>' % (tx, ty, ACCENT if wv else INK, tx, ty, F(vc) + (' ⚠' if wv else '')))
+    if h < 9:  # cota curta: texto na horizontal, à esquerda
+        out.append('<text x="%.2f" y="%.2f" font-size="3.2" font-weight="700" text-anchor="end" fill="%s">%s</text>' % (xx - 1.4, ty + 1.1, ACCENT if wv else INK, F(vc) + (' ⚠' if wv else '')))
+    else:
+        out.append('<text x="%.2f" y="%.2f" font-size="3.2" font-weight="700" text-anchor="middle" fill="%s" transform="rotate(-90 %.2f %.2f)">%s</text>' % (tx, ty, ACCENT if wv else INK, tx, ty, F(vc) + (' ⚠' if wv else '')))
     out.append('</svg>')
     return '\n'.join(out), view, (wh or wv), (hc, vc, hm, vm, names)
 
@@ -299,7 +303,7 @@ def ortho(pj, mid, view, W, H, dims=True, hw=True, scale=None, detail=True):
                 o.dim((lo[1], -b[1][2]), (b[0][1], -b[1][2]), 'h', -40, None)
             if detail and cot.get('recuo_base'):
                 b = pj.P[cot['recuo_base']]['boxes'][0]
-                o.dim((lo[1], -lo[2]), (b[0][1], -lo[2]), 'h', 22, None)
+                o.dim((lo[1], -lo[2]), (b[0][1], -lo[2]), 'h', 0.03 * H_ + 36, None)
         elif view == 'top':
             o.dim((lo[0], -hi[1]), (hi[0], -hi[1]), 'h', -50, F(Wd))
             o.dim((hi[0], -flo[1]), (hi[0], -hi[1]), 'v', 50, None)

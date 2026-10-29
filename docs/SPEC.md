@@ -51,6 +51,7 @@ Caminhos de `arquivos` são relativos à pasta do spec. `fabricante`/`endereco` 
 | `raizes` | Lista de trechos do nome da definição (ou índices) dos componentes da raiz do modelo que pertencem ao módulo. Ex.: um armário + a porta avulsa + a prateleira avulsa |
 | `copias` | Opcional. Módulos iguais repetidos no modelo: lista de conjuntos de raízes, um por unidade extra (ex.: `[[0, 1, 2, 3, 4]]`). Só a unidade de `raizes` é desenhada; as cópias entram na contagem (`qtd_modelo`) e na conferência dos itens da lista. Os IDs de todas as unidades vão nos mesmos códigos |
 | `nome_unidade` | Opcional, com `copias`: nome de uma unidade no cartão da peça (ex.: "balcão" → "8 (4 por balcão × 2)") |
+| `rotulo_dims` / `rotulo_altura` / `alerta_altura` | Opcionais: rótulo das medidas gerais na identificação e na vista montado (ex.: "(com base)") e alerta ⚠ ao lado da altura (ex.: "PDF: 0,90 m") |
 | `qtd_texto` | Opcional, com `copias`: texto da linha "Quantidade" na identificação e na vista montado |
 | `gabster`, `pdf_spec` | Texto de origem (componente Gábster; especificações do PDF) |
 | `componentes` | Lista da página "Vista do móvel montado" |
@@ -73,7 +74,8 @@ A origem de cada módulo é o canto frontal-esquerdo da caixa (peças com `funca
 | `conflitos` | IDs de conflito citados nos alertas automáticos (`["C01"]`) |
 | `alerta_espessura` | Força alerta de espessura |
 | `obs` | Observações extras na lista de peças |
-| `furacao`, `recortes`, `veio` | Substituem os textos padrão do cartão da peça |
+| `furacao`, `recortes`, `veio`, `fita` | Substituem os textos padrão do cartão da peça (ex.: `fita` quando o parâmetro Gábster já informa os lados) |
+| `alerta_chapa` | `true` põe ⚠ confirmar na linha Chapa (cor ou material divergente entre as fontes) |
 | `filtro_z` | `[zmin, zmax]` em coordenadas do modelo, para separar peças de mesmo nome |
 
 Peças idênticas usam um código só; a quantidade vem do número de instâncias visíveis no modelo.
