@@ -49,6 +49,9 @@ Caminhos de `arquivos` são relativos à pasta do spec. `fabricante`/`endereco` 
 | `id` | `M01`, `M02`… |
 | `nome`, `sub`, `rotulo` | Títulos. `rotulo` é o cabeçalho em caixa alta |
 | `raizes` | Lista de trechos do nome da definição (ou índices) dos componentes da raiz do modelo que pertencem ao módulo. Ex.: um armário + a porta avulsa + a prateleira avulsa |
+| `copias` | Opcional. Módulos iguais repetidos no modelo: lista de conjuntos de raízes, um por unidade extra (ex.: `[[0, 1, 2, 3, 4]]`). Só a unidade de `raizes` é desenhada; as cópias entram na contagem (`qtd_modelo`) e na conferência dos itens da lista. Os IDs de todas as unidades vão nos mesmos códigos |
+| `nome_unidade` | Opcional, com `copias`: nome de uma unidade no cartão da peça (ex.: "balcão" → "8 (4 por balcão × 2)") |
+| `qtd_texto` | Opcional, com `copias`: texto da linha "Quantidade" na identificação e na vista montado |
 | `gabster`, `pdf_spec` | Texto de origem (componente Gábster; especificações do PDF) |
 | `componentes` | Lista da página "Vista do móvel montado" |
 | `nota_montado`, `nota_medidas` | Notas das páginas 3 e 4 |
@@ -99,7 +102,7 @@ Tabela da seção 6: `code`, `nome`, `qtd` (texto), `origem_qtd` (`E`/`A`…), `
  "hw": [{"key": "F01", "idx": [0, 1], "offset_lados": [[-270,0,0],[270,0,0]], "sub": "×4 pares"}],
  "rotulos": {"P21": "×3"}, "legenda": {"pecas": [...], "ferragens": [...]}, "nota": "..."}
 ```
-Deslocamentos em mm: x = direita, y = para trás (negativo = para a frente), z = para cima. `inst` mostra só a instância k de cada peça (ex.: uma gaveta). `offset_lados` usa o 1º vetor para o que está à esquerda do centro do módulo e o 2º para a direita.
+Deslocamentos em mm: x = direita, y = para trás (negativo = para a frente), z = para cima. `contexto` lista códigos desenhados em cinza, na posição montada e sem balão (referência). `inst` mostra só a instância k de cada peça (ex.: uma gaveta) ou, como objeto, as instâncias de cada código (`{"P13": [0, 1]}`). `offset_lados` usa o 1º vetor para o que está à esquerda do centro do módulo e o 2º para a direita (`ref_x` muda o centro de referência, em mm do módulo). Em `pecas`/`offsets`, `{"lados": [a, b], "eixo": "y", "ref": 250}` separa por outro eixo ou outra referência (ex.: painel frontal × traseiro).
 
 ### `etapas[]`
 ```json
@@ -111,7 +114,7 @@ Deslocamentos em mm: x = direita, y = para trás (negativo = para a frente), z =
 `mostrar` = já instaladas (cinza). `novas` = desta etapa (laranja, deslocadas por `offsets`, com seta). Duas etapas por folha.
 
 ### `detalhes`
-- `portas[]`: `porta`, `inst`, `dobradicas` (chave hardware), `puxador` (chave hardware), `contexto` (códigos ao redor), `corte_z`, `sub`, `linhas` (`[[rótulo, texto]]`), `nota`. Desenho e cotas (eixos das dobradiças, posição) são automáticos.
+- `portas[]`: `porta`, `inst`, `dobradicas` (chave hardware), `puxador` (chave hardware), `contexto` (códigos ao redor), `corte_z`, `cota_esq_x`/`cota_dir_x` (referência das cotas horizontais da porta, em mm do módulo; padrão = bordas da caixa), `sub`, `linhas` (`[[rótulo, texto]]`), `nota`. Desenho e cotas (eixos das dobradiças, posição) são automáticos.
 - `gavetas[]`: `mod`, `sub`, `linhas`, `ordem`.
 - `puxadores`: `sub`, `itens` (`{painel, inst, hw, hw_idx, legenda}` — centro calculado), `tabela` (`cabecalho`, `linhas`; linha com 2 itens ocupa as colunas restantes).
 Sem itens, a seção sai como "Não se aplica a este projeto".

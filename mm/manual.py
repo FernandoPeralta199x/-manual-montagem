@@ -130,8 +130,9 @@ class Manual:
         for mid in pj.mod_ids():
             m = pj.mods[mid]
             lo, hi = pj.caixa_bbox(mid)
-            caps += '<span class="cv-cap">%s · %s · %s × %s × %s</span>' % (mid, m['nome'], F(hi[0] - lo[0]), F(hi[1] - lo[1]), F(hi[2] - lo[2]))
-            mods += '%s — %s<br>' % (mid, m['nome'])
+            un = pj.unidades(mid)
+            caps += '<span class="cv-cap">%s · %s · %s × %s × %s%s</span>' % (mid, m['nome'], F(hi[0] - lo[0]), F(hi[1] - lo[1]), F(hi[2] - lo[2]), (' · ×%d' % un) if un > 1 else '')
+            mods += '%s — %s%s<br>' % (mid, m['nome'], (' <b>(×%d)</b>' % un) if un > 1 else '')
         n_alta = sum(1 for c in self.S.get('conflitos', []) if c['prioridade'] == 'ALTA')
         aviso = self.S.get('aviso_capa') or ('<b>Antes de montar:</b> leia a seção %d.3 — Conflitos e pendências.' % self.nums['info'] + ((' Há 1 ponto de prioridade ALTA a confirmar com a produção.' if n_alta == 1 else ' Há %d pontos de prioridade ALTA a confirmar com a produção.' % n_alta) if n_alta else ''))
         html = '''<div class="cover"><div class="cv-left">
@@ -164,11 +165,12 @@ class Manual:
             tall = (hi[2] - lo[2]) > 1.6 * (hi[0] - lo[0])
             mods += '''<div class="modcard"><div class="mc-head"><span class="mono">%s</span> %s</div><div class="mc-body"><div class="mc-fig">%s</div><div class="mc-txt">
 <p class="mc-sub">%s</p><table class="kv">
-<tr><th>Largura × prof. × altura (caixa)</th><td class="mono">%s × %s × %s mm %s</td></tr>
+%s<tr><th>Largura × prof. × altura (caixa)</th><td class="mono">%s × %s × %s mm %s</td></tr>
 <tr><th>Profundidade com frentes</th><td class="mono">%s mm %s</td></tr>
 <tr><th>Componente no modelo</th><td>%s</td></tr>
 <tr><th>Especificação (PDF)</th><td>%s</td></tr></table></div></div></div>''' % (
-                mid, esc(m['nome'].upper()), assembled(pj, mid, 46, 70 if tall else 62, dims=False), tx(m.get('sub', '')),
+                mid, esc(m['nome'].upper()), assembled(pj, mid, 46, 58 if tall else 62, dims=False), tx(m.get('sub', '')),
+                ('<tr><th>Quantidade</th><td>%s</td></tr>' % tx(m.get('qtd_texto') or '%d unidades iguais {E}' % pj.unidades(mid))) if pj.unidades(mid) > 1 else '',
                 F(hi[0] - lo[0]), F(hi[1] - lo[1]), F(hi[2] - lo[2]), tg('E'), F(hi[1] - flo[1]), tg('C'),
                 tx(m.get('gabster', '—')), '<br>'.join(tx(x) for x in m.get('pdf_spec', [])) or tx('Não informado {A}'))
         html = h1(self.n('identificacao'), 'Identificação do projeto') + '''<div class="cols2"><div><h3>Projeto</h3><table class="kv big">%s</table>
@@ -224,12 +226,14 @@ class Manual:
             tall = (hi[2] - lo[2]) > 1.6 * (hi[0] - lo[0])
             svg = assembled(pj, mid, 150 if tall else 190, 158)
             txt = '''<h3>%s</h3><p class="muted">%s</p><table class="kv">
-<tr><th>Largura</th><td class="mono">%s mm %s</td></tr><tr><th>Altura</th><td class="mono">%s mm %s</td></tr>
+%s<tr><th>Largura</th><td class="mono">%s mm %s</td></tr><tr><th>Altura</th><td class="mono">%s mm %s</td></tr>
 <tr><th>Profundidade da caixa</th><td class="mono">%s mm %s</td></tr><tr><th>Profundidade com frente</th><td class="mono">%s mm %s</td></tr>
 <tr><th>Profundidade com ferragens</th><td class="mono">%s mm %s</td></tr></table>
 <h3>Componentes visíveis</h3><ul class="tight">%s</ul>
 <p class="note">Desenho gerado a partir da geometria do arquivo SketchUp.%s</p>''' % (
-                esc(m['nome']), tx(m.get('sub', '')), F(hi[0] - lo[0]), tg('E'), F(hi[2] - lo[2]), tg('E'), F(hi[1] - lo[1]), tg('E'),
+                esc(m['nome']), tx(m.get('sub', '')),
+                ('<tr><th>Quantidade</th><td>%s</td></tr>' % tx(m.get('qtd_texto') or '%d unidades iguais {E}' % pj.unidades(mid))) if pj.unidades(mid) > 1 else '',
+                F(hi[0] - lo[0]), tg('E'), F(hi[2] - lo[2]), tg('E'), F(hi[1] - lo[1]), tg('E'),
                 F(hi[1] - flo[1]), tg('C'), F(hi[1] - hlo[1]), tg('C'), ''.join('<li>%s</li>' % tx(c) for c in m.get('componentes', [])), tx(' ' + m['nota_montado']) if m.get('nota_montado') else '')
             self.page(self.lab('montado'), h1(self.n('montado'), 'Vista do móvel montado', self.modlabel(mid)) + '<div class="fig-side"><div class="fig">%s</div><div class="side">%s</div></div>' % (svg, txt), mid)
 
@@ -241,7 +245,7 @@ class Manual:
             lo, hi = pj.caixa_bbox(mid)
             tall = (hi[2] - lo[2]) > 1.6 * (hi[0] - lo[0])
             if tall:
-                (f, r), s = ortho_set(pj, mid, [('front', 78, 160), ('right', 100, 160)])
+                (f, r), s = ortho_set(pj, mid, [('front', 74, 146), ('right', 96, 146)])
                 t = ortho(pj, mid, 'top', 60, 92, scale=s * 1.3)
             else:
                 (f, r), s = ortho_set(pj, mid, [('front', 112, 148), ('right', 92, 148)])
@@ -302,7 +306,7 @@ class Manual:
         s = '<table class="leg">'
         for c in codes:
             p = self.pj.P[c]
-            s += '<tr><td class="mono b">%s</td><td>%s</td><td class="num">×%d</td></tr>' % (c, esc(p['nome']), p['qtd_modelo'])
+            s += '<tr><td class="mono b">%s</td><td>%s</td><td class="num">×%d</td></tr>' % (c, esc(p['nome']), p.get('qtd_unid', p['qtd_modelo']))
         for h in hw:
             f = self.fer.get(h, {'nome': h})
             s += '<tr><td class="mono b">%s</td><td>%s</td><td class="num"></td></tr>' % (h, esc(f['nome']))
@@ -327,10 +331,10 @@ class Manual:
     def part_card(self, c):
         pj = self.pj
         p = pj.P[c]
-        svg, view, warn, info = part_svg(pj, c, 58, 56)
+        svg, view, warn, info = part_svg(pj, c, 54, 54)
         lo, hi = pj.caixa_bbox(p['mod'])
         tall = (hi[2] - lo[2]) > 1.6 * (hi[0] - lo[0])
-        loc = locator(pj, p['mod'], c, 22, 46 if tall else 28)
+        loc = locator(pj, p['mod'], c, 19, 46 if tall else 25)
         lam = p['csv'][0]['lam'] if p['csv'] else ''
         furos = 'c/ furos' in lam
         esp = '/'.join(map(str, p['esp_csv'])) + ' mm' if p['esp_csv'] else '—'
@@ -341,10 +345,10 @@ class Manual:
         rows = [
             ('Corte (lista)', '<span class="mono">%s × %s × %s</span> %s' % (p['csv'][0]['c'] if p['csv'] else '—', p['csv'][0]['l'] if p['csv'] else '—', esp, tg('E'))),
             ('Modelo 3D', '<span class="mono">%s × %s × %s</span> %s%s' % (F(p['dim_modelo'][0]), F(p['dim_modelo'][1]), F(p['dim_modelo'][2]), tg('E'), (' <span class="warn">⚠ %s</span>' % (cref or 'diverge')) if warn else '')),
-            ('Quantidade', 'modelo <b>%d</b> · lista <b>%d</b>%s' % (qm, qc, (' <span class="warn">⚠ %s</span>' % (cref or 'diverge')) if qm != qc else '')),
+            ('Quantidade', 'modelo <b>%d</b>%s · lista <b>%d</b>%s' % (qm, (' (%d por %s)' % (p['qtd_unid'], esc(pj.mods[p['mod']].get('nome_unidade', 'módulo')))) if p.get('unidades', 1) > 1 else '', qc, (' <span class="warn">⚠ %s</span>' % (cref or 'diverge')) if qm != qc else '')),
             ('Chapa', esc(self.chapa(p)) + ((' <span class="warn">⚠ %s</span>' % (cref or 'confirmar')) if (len(p['esp_csv']) > 1 or p.get('alerta_espessura')) else '')),
             ('Fita', '%s %s · %s %s' % (esc(lam_code), tg('E'), lam_expand(lam), tg('I'))),
-            ('ID lista', '<span class="mono">%s</span>' % ' · '.join(x['id'] for x in p['csv'])),
+            ('ID lista', ('<span class="mono idl">%s</span>' if len(p['csv']) > 6 else '<span class="mono">%s</span>') % (' ' if len(p['csv']) > 6 else ' · ').join(x['id'] for x in p['csv'])),
             ('Furação', tx(p.get('furacao') or ('“c/ furos” na lista {E} · furação de fábrica {I} · posição não identificada no modelo {A}' if furos else 'Sem indicação na lista {E} · não identificada no modelo {A}'))),
             ('Recortes', tx(p.get('recortes') or 'Não identificados no modelo {A}')),
             ('Veio', tx(p.get('veio') or 'Não especificado no projeto {A}')),
@@ -485,7 +489,9 @@ class Manual:
             return '<table class="grid csvt"><thead><tr><th>Seq.</th><th>ID</th><th>Descrição (lista de corte)</th><th>C</th><th>L</th><th>Material</th><th>Qtd.</th><th>Código</th></tr></thead><tbody>%s</tbody></table>' % ''.join(
                 '<tr><td class="num">%d</td><td class="mono">%s</td><td class="small">%s</td><td class="num">%d</td><td class="num">%d</td><td class="small">%s</td><td class="num">%d</td><td class="mono b">%s</td></tr>' % (
                     r['seq'], r['id'], esc(r['desc'].replace('Etiq.', '')), r['c'], r['l'], esc(r['mat']), r['qtd'], code_of.get(r['id'], '<span class="warn">—</span>')) for r in rs)
-        per = 46
+        max_col = 33  # linhas por coluna que cabem na folha
+        n_pg = max(1, -(-len(rows) // (max_col * 2)))
+        per = -(-len(rows) // (n_pg * 2))  # distribui por igual entre as folhas
         for k in range(0, len(rows), per * 2):
             chunk = rows[k:k + per * 2]
             h = (len(chunk) + 1) // 2

@@ -39,7 +39,7 @@ Se faltar o `.skp` ou o `.csv`, peça antes de começar.
 
 ### 3. Escrever o spec.json
 Leia `docs/SPEC.md` e use `examples/74391/spec.json` como modelo. Crie `<pasta>/spec.json`:
-- **Módulos:** um por móvel. `raizes` inclui os componentes avulsos que pertencem a ele (porta, prateleira).
+- **Módulos:** um por móvel. Móveis iguais repetidos no modelo (ex.: 2 balcões idênticos) viram um módulo só, com as outras unidades em `copias`; os IDs de todas as unidades vão nos mesmos códigos. `raizes` inclui os componentes avulsos que pertencem a ele (porta, prateleira).
 - **Peças:** um código por peça distinta (P01…, ordenados por módulo). Peças idênticas usam um código só, e a quantidade vem do modelo. O `sel` é o rótulo do componente no inventário. Toda linha do CSV vai em exatamente um código (`ids`).
 - **Ferragens:** só o que o modelo mostra (camadas visíveis + parâmetros Gábster). Quantidade contada no modelo. O que não aparece fica "Ferragem não especificada no projeto." com qtd "—".
 - **Conflitos:** cada divergência vira um C0x com o que cada fonte informa e como o manual trata. Cite o conflito nas peças (`conflitos`). Por padrão o template **não imprime** a página de conflitos, as listas de peças e de ferragens, o aviso da capa nem o Anexo B (`ocultar`, ver `docs/SPEC.md`). Por isso:
@@ -54,7 +54,7 @@ Leia `docs/SPEC.md` e use `examples/74391/spec.json` como modelo. Crie `<pasta>/
 2. `python3 -m mm medidas <pasta>/spec.json`: posições, folgas entre frentes, afastamentos, centros de puxador e eixos de dobradiça. Use esses números nas etapas, nos detalhes (portas, gavetas, puxadores), na regulagem e na conferência final.
 
 ### 5. Gerar e revisar
-1. `python3 -m mm gerar <pasta>/spec.json --saida <pasta>/saida`. O número de páginas do PDF deve ser igual ao de folhas; se não for, algum conteúdo transbordou: encurte o texto ou ajuste `tamanho`.
+1. `python3 -m mm gerar <pasta>/spec.json --saida <pasta>/saida`. O número de páginas do PDF deve ser igual ao de folhas, e não pode haver aviso `ATENÇÃO: folha-XX — conteúdo passa…` (conteúdo cortado ou invadindo o rodapé). Se houver, encurte o texto ou ajuste `tamanho`.
 2. Veja todas as miniaturas `saida/png/revisao_XX.png`. Procure etiquetas sobrepostas, peças explodidas sobre outras, cotas cortadas e texto estourando. Corrija ajustando `offsets`, `tamanho` e textos, e gere de novo.
 3. Verificação independente: lance um subagente que não escreveu o manual para conferir o PDF contra o CSV, o PDF de venda e a saída do `medidas`. Ele deve checar números, quantidades, IDs, materiais, conflitos e qualquer afirmação sem fonte. Corrija o que ele achar, regenere e preencha `auditoria` com as 17 perguntas do controle de qualidade (não sai impresso por padrão, mas o resultado vai na resposta final).
 

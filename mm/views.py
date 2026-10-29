@@ -91,8 +91,17 @@ def _hw_offset(spec_item, j, o, mid_x):
     if 'offset_lados' in spec_item:
         left, right = spec_item['offset_lados']
         cx = (o.lo[0] + o.hi[0]) / 2
-        return left if cx < mid_x else right
+        return left if cx < spec_item.get('ref_x', mid_x) else right
     return spec_item.get('offset', [0, 0, 0])
+
+
+def _lado(d, b, lo, hi):
+    """offset {'lados': [menor, maior], 'eixo': 'x'|'y'|'z'}: escolhe pelo centro da peça em relação ao centro do módulo."""
+    if not (isinstance(d, dict) and 'lados' in d):
+        return d
+    ax = 'xyz'.index(d.get('eixo', 'x'))
+    c = (b[0][ax] + b[1][ax]) / 2
+    return d['lados'][0] if c < d.get('ref', (lo[ax] + hi[ax]) / 2) else d['lados'][1]
 
 
 def ghost_scene(pj, mid, show, new, offsets=None, hw_show=(), hw_new=(), label_sub=None, arrow_codes=None, inst=None, labels=True, arrows=True):
@@ -110,10 +119,7 @@ def ghost_scene(pj, mid, show, new, offsets=None, hw_show=(), hw_new=(), label_s
             if c in show:
                 sc.add(box(b[0], b[1], fill=GHOST_FILL, stroke=GHOST_STROKE, ghost=True, sw=0.14))
             elif c in new:
-                d = offsets.get(c, [0, 0, 0])
-                if isinstance(d, dict) and 'lados' in d:
-                    cx = (b[0][0] + b[1][0]) / 2
-                    d = d['lados'][0] if cx < mid_x else d['lados'][1]
+                d = _lado(offsets.get(c, [0, 0, 0]), b, lo, hi)
                 i = sc.add(box(b[0], b[1], fill=ACCENT_FILL, stroke=INK, sw=0.2).moved(d))
                 lab.setdefault(c, []).append(i)
                 if arrows and any(abs(x) > 1 for x in d) and (arrow_codes is None or c in arrow_codes):
@@ -150,15 +156,18 @@ def exploded(pj, ex):
     mid_x = (lo[0] + hi[0]) / 2
     k_only = ex.get('inst')
     rot = ex.get('rotulos', {})
+    for c in ex.get('contexto', []):  # peças de referência, em cinza e sem balão
+        for b in pj.P[c]['boxes']:
+            sc.add(box(b[0], b[1], fill=GHOST_FILL, stroke=GHOST_STROKE, ghost=True, sw=0.14))
     for c, d in ex['pecas'].items():
         p = pj.P[c]
-        boxes = [p['boxes'][k_only]] if k_only is not None else p['boxes']
+        if isinstance(k_only, dict):
+            boxes = [p['boxes'][k] for k in k_only.get(c, range(len(p['boxes'])))]
+        else:
+            boxes = [p['boxes'][k_only]] if k_only is not None else p['boxes']
         ids = []
         for b in boxes:
-            dd = d
-            if isinstance(d, dict) and 'lados' in d:
-                cx = (b[0][0] + b[1][0]) / 2
-                dd = d['lados'][0] if cx < mid_x else d['lados'][1]
+            dd = _lado(d, b, lo, hi)
             ids.append(sc.add(box(b[0], b[1], fill=pfill(pj, c)).moved(dd)))
         n = len(ids)
         sc.labels.append((c, [ids[n // 2]] if n > 1 else ids, rot.get(c, '×%d' % n if n > 1 else None)))
@@ -354,8 +363,11 @@ def door_detail(pj, det, W, H):
     xo = x0 if side_right else x1
     o.dim((xo, -lo[2]), (xo, -z0), 'v', -sg * 40, None)
     o.dim((xo, -z0), (xo, -z1), 'v', -sg * 40, None)
-    o.dim((lo[0], -z0), (x0, -z0), 'h', 22, None)
-    o.dim((x1, -z0), (hi[0], -z0), 'h', 22, None)
+    xl, xr = det.get('cota_esq_x', lo[0]), det.get('cota_dir_x', hi[0])
+    if abs(x0 - xl) > 0.05:
+        o.dim((xl, -z0), (x0, -z0), 'h', 22, None)
+    if abs(xr - x1) > 0.05:
+        o.dim((x1, -z0), (xr, -z0), 'h', 22, None)
     return o.render(W, H)
 
 
@@ -383,12 +395,17 @@ def handle_detail(W, H, fw, fh, hx, hz, hlen, vertical=False, cor='#a3a8ad'):
 
     def dimv(ya, yb, x, t):
         out.append('<line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="%s" stroke-width="0.2" marker-start="url(#hh)" marker-end="url(#hh)"/>' % (x, ya, x, yb, INK))
+        if abs(yb - ya) < 9:  # cota curta: texto ao lado, sem girar
+            out.append('<text x="%.2f" y="%.2f" font-size="3" font-weight="700" fill="%s">%s</text>' % (x + 1.4, (ya + yb) / 2 + 1.1, INK, t))
+            return
         out.append('<text x="%.2f" y="%.2f" font-size="3" font-weight="700" text-anchor="middle" fill="%s" transform="rotate(-90 %.2f %.2f)">%s</text>' % (x - 1, (ya + yb) / 2, INK, x - 1, (ya + yb) / 2, t))
     dimh(x0, cx, y0 + fh * s + 6, F(hx))
     dimh(x0, x0 + fw * s, y0 - 6, F(fw))
     dimv(y0, cy, x0 + fw * s + 6, F(hz))
     dimv(y0, y0 + fh * s, x0 - 6, F(fh))
-    out.append('<text x="%.2f" y="%.2f" font-size="2.6" fill="%s" font-weight="600">centro do puxador</text>' % (cx + 2, cy - 2.2, ACCENT))
+    right = hx > fw * 0.6  # rótulo para o lado com mais espaço; abaixo se o centro estiver perto do topo
+    ty = cy + 4.6 if hz * s < 9 else cy - 2.2
+    out.append('<text x="%.2f" y="%.2f" font-size="2.6" fill="%s" font-weight="600" text-anchor="%s">centro do puxador</text>' % (cx - 2 if right else cx + 2, ty, ACCENT, 'end' if right else 'start'))
     out.append('</svg>')
     return '\n'.join(out)
 

@@ -4,7 +4,21 @@ import os
 import subprocess
 
 
+# Conteúdo que não cabe: (a) o miolo .pg-m passa do limite; (b) um bloco com overflow escondido
+# (ex.: cartão de peça) corta o próprio conteúdo — no PDF ele cresce e invade o rodapé.
+OVERFLOW_JS = """() => Array.from(document.querySelectorAll('section.sheet')).map(s => {
+  const m = s.querySelector('.pg-m'); if (!m) return null;
+  let worst = m.scrollHeight - m.clientHeight;
+  m.querySelectorAll('*').forEach(e => {
+    if (e.closest('svg')) return;
+    const ov = getComputedStyle(e).overflowY;
+    if (ov !== 'visible' && e.clientHeight > 0) worst = Math.max(worst, e.scrollHeight - e.clientHeight);
+  });
+  return worst > 6 ? [s.id, worst] : null; }).filter(x => x)"""
+
+
 def to_pdf(html_path, pdf_path):
+    """Gera o PDF e devolve o nº de páginas. to_pdf.overflow = [(id da folha, px além do limite)]."""
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
         b = p.chromium.launch()
@@ -12,6 +26,9 @@ def to_pdf(html_path, pdf_path):
         pg.goto('file://' + os.path.abspath(html_path))
         pg.wait_for_timeout(800)
         pg.emulate_media(media='print')
+        pg.wait_for_timeout(200)
+        # conteúdo que passa do miolo da folha (invade o rodapé ou é cortado)
+        to_pdf.overflow = pg.evaluate(OVERFLOW_JS)
         pg.pdf(path=pdf_path, prefer_css_page_size=True, print_background=True)
         b.close()
     try:
@@ -22,6 +39,9 @@ def to_pdf(html_path, pdf_path):
     except FileNotFoundError:
         pass
     return None
+
+
+to_pdf.overflow = []
 
 
 def contact_sheets(png_dir, per=4):

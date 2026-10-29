@@ -69,6 +69,8 @@ def main(argv=None):
             from .export import to_pdf
             n = to_pdf(p_print, pdf)
             print('pdf:', pdf, '(%s páginas)' % n)
+            for fid, px in to_pdf.overflow:
+                print('ATENÇÃO: %s — conteúdo passa %d px do limite da folha (invade o rodapé ou é cortado).' % (fid, px))
             if n is not None and n != len(man.pages):
                 print('ATENÇÃO: o PDF tem %s páginas, mas o manual tem %d folhas — algum conteúdo transbordou.' % (n, len(man.pages)))
             if not args.sem_png and shutil.which('pdftoppm'):

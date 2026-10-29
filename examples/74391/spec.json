@@ -192,7 +192,7 @@
    ],
    "mdf_pdf": true,
    "conflitos": [
-    "C02"
+    "C01"
    ],
    "alerta_espessura": true
   },
@@ -235,7 +235,7 @@
     "57584"
    ],
    "conflitos": [
-    "C04"
+    "C03"
    ]
   },
   {
@@ -251,7 +251,7 @@
     "57586"
    ],
    "conflitos": [
-    "C04"
+    "C03"
    ]
   },
   {
@@ -267,7 +267,7 @@
     "57585"
    ],
    "conflitos": [
-    "C04"
+    "C03"
    ]
   },
   {
@@ -279,10 +279,7 @@
    "ids": [
     "57546"
    ],
-   "mdf_pdf": true,
-   "conflitos": [
-    "C01"
-   ]
+   "mdf_pdf": true
   },
   {
    "code": "P15",
@@ -293,10 +290,7 @@
    "ids": [
     "57550"
    ],
-   "mdf_pdf": true,
-   "conflitos": [
-    "C01"
-   ]
+   "mdf_pdf": true
   },
   {
    "code": "P16",
@@ -307,10 +301,7 @@
    "ids": [
     "57547"
    ],
-   "mdf_pdf": true,
-   "conflitos": [
-    "C01"
-   ]
+   "mdf_pdf": true
   },
   {
    "code": "P17",
@@ -321,10 +312,7 @@
    "ids": [
     "57548"
    ],
-   "mdf_pdf": true,
-   "conflitos": [
-    "C01"
-   ]
+   "mdf_pdf": true
   },
   {
    "code": "P18",
@@ -335,10 +323,7 @@
    "ids": [
     "57549"
    ],
-   "mdf_pdf": true,
-   "conflitos": [
-    "C01"
-   ]
+   "mdf_pdf": true
   },
   {
    "code": "P19",
@@ -349,10 +334,7 @@
    "ids": [
     "57545"
    ],
-   "mdf_pdf": true,
-   "conflitos": [
-    "C01"
-   ]
+   "mdf_pdf": true
   },
   {
    "code": "P20",
@@ -362,9 +344,6 @@
    "funcao": "prateleira",
    "ids": [
     "57537"
-   ],
-   "conflitos": [
-    "C01"
    ],
    "obs": [
     "Sobre a porta"
@@ -381,9 +360,6 @@
     "57543",
     "57544"
    ],
-   "conflitos": [
-    "C01"
-   ],
    "obs": [
     "Recuo 54 da frente"
    ]
@@ -398,9 +374,6 @@
     "57541"
    ],
    "mdf_pdf": true,
-   "conflitos": [
-    "C01"
-   ],
    "obs": [
     "Dobradiças à direita"
    ],
@@ -466,7 +439,7 @@
    "origem_qtd": "E",
    "aplicacao": "Frentes P08 (4) e porta P22 (1)",
    "origem": "Modelo: 1 puxador visível por frente/porta. PDF: “Puxador Gala 128 mm”. Modelo: Haste 192.",
-   "obs": "CONFLITO C03 — modelo do puxador a confirmar."
+   "obs": "CONFLITO C02 — modelo do puxador a confirmar."
   },
   {
    "code": "F04",
@@ -509,26 +482,6 @@
   {
    "id": "C01",
    "prioridade": "ALTA",
-   "titulo": "Quantidade do Módulo 02 (armário)",
-   "fontes": [
-    [
-     "Modelo 3D",
-     "1 armário, 1 porta de giro, 1 prateleira 15 mm, 3 prateleiras internas."
-    ],
-    [
-     "Lista de corte",
-     "Laterais, bases, rodapé e fundo do armário com qtd. 2; porta 294 × 294 com qtd. 3; prateleira 15 mm com qtd. 4; prateleiras internas 3 × 2 = 6."
-    ],
-    [
-     "PDF",
-     "Mostra 1 armário (folha 2)."
-    ]
-   ],
-   "tratamento": "Este manual descreve 1 armário, conforme o modelo. Confirmar com o pedido quantos armários, portas e prateleiras serão montados antes de iniciar."
-  },
-  {
-   "id": "C02",
-   "prioridade": "ALTA",
    "titulo": "Espessura das frentes de gaveta (P08)",
    "fontes": [
     [
@@ -547,7 +500,7 @@
    "tratamento": "Não montar frentes de espessuras diferentes no mesmo gaveteiro sem confirmação. A posição de cada ID no gaveteiro não está definida no projeto."
   },
   {
-   "id": "C03",
+   "id": "C02",
    "prioridade": "MÉDIA",
    "titulo": "Modelo do puxador (F03)",
    "fontes": [
@@ -563,7 +516,7 @@
    "tratamento": "A distância entre furos depende do puxador. Não furar frentes e porta antes de confirmar o modelo do puxador."
   },
   {
-   "id": "C04",
+   "id": "C03",
    "prioridade": "MÉDIA",
    "titulo": "Corpo da gaveta (P11, P12, P13)",
    "fontes": [
@@ -579,7 +532,7 @@
    "tratamento": "As peças físicas seguem a lista de corte. A forma de fixação do fundo da gaveta não pode ser confirmada pelo modelo: confirmar com a produção."
   },
   {
-   "id": "C05",
+   "id": "C04",
    "prioridade": "BAIXA",
    "titulo": "Lado das dobradiças da porta (P22)",
    "fontes": [
@@ -599,7 +552,7 @@
    "tratamento": "O manual segue a geometria do modelo: dobradiças do lado DIREITO. O “Dir” da lista de corte é compatível, mas é uma interpretação (I). Confirmar antes de furar."
   },
   {
-   "id": "C06",
+   "id": "C05",
    "prioridade": "BAIXA",
    "titulo": "Recuo das prateleiras internas (P21)",
    "fontes": [
@@ -615,7 +568,7 @@
    "tratamento": "Posicionar conforme a furação de fábrica. A medida de 54 mm é a do modelo."
   },
   {
-   "id": "C07",
+   "id": "C06",
    "prioridade": "BAIXA",
    "titulo": "Espessura nominal x modelo",
    "fontes": [
@@ -631,7 +584,7 @@
    "tratamento": "As cotas de posição deste manual vêm do modelo (15,5 / 18,5 mm). Diferenças de até 0,5 mm por chapa são esperadas."
   },
   {
-   "id": "C08",
+   "id": "C07",
    "prioridade": "BAIXA",
    "titulo": "Profundidade do gaveteiro (M01)",
    "fontes": [
@@ -1084,7 +1037,7 @@
     ]
    },
    "desc": "Monte os 4 corpos de gaveta: laterais P09 e P10, frontal P11, traseiro P12 e fundo P13. No modelo, o fundo fica entre as laterais e o frontal/traseiro apoiam sobre ele {E}.",
-   "obs": "{!C04} Na lista de corte P11/P12 medem 526 × 98 e P13 557 × 500 (modelo: 526 × 80,8 e 526 × 500). Confirmar a fixação do fundo antes de montar."
+   "obs": "{!C03} Na lista de corte P11/P12 medem 526 × 98 e P13 557 × 500 (modelo: 526 × 80,8 e 526 × 500). Confirmar a fixação do fundo antes de montar."
   },
   {
    "id": "E07",
@@ -1177,7 +1130,7 @@
     ]
    },
    "desc": "Fixe as frentes P08 nos corpos. Face inferior da 1ª frente a 103 mm do piso; frentes com 158,75 mm de altura; folga de 3 mm entre frentes e no topo; 3 mm de afastamento em cada lateral {C}.",
-   "obs": "{!C02} Espessura das frentes a confirmar (PDF 15 mm · modelo 18,5 mm · lista 2 × 18 + 2 × 15)."
+   "obs": "{!C01} Espessura das frentes a confirmar (PDF 15 mm · modelo 18,5 mm · lista 2 × 18 + 2 × 15)."
   },
   {
    "id": "E09",
@@ -1213,7 +1166,7 @@
     "F03": "×4"
    },
    "desc": "Instale um puxador F03 por frente. Centro do puxador: no centro da largura da frente (297 mm da borda) e a 83,4 mm da borda superior da frente {C}.",
-   "obs": "{!C03} Distância entre furos depende do puxador: 192 mm (modelo) ou 128 mm (Gala, PDF). Não furar antes de confirmar."
+   "obs": "{!C02} Distância entre furos depende do puxador: 192 mm (modelo) ou 128 mm (Gala, PDF). Não furar antes de confirmar."
   },
   {
    "id": "E10",
@@ -1393,7 +1346,7 @@
     }
    ],
    "desc": "Instale o puxador F03 na porta, horizontal, com centro a 39 mm da borda superior e a 140 mm da borda esquerda da porta {C}.",
-   "obs": "{!C03} Confirmar o modelo do puxador antes de furar. No modelo, o puxador fica 7 mm à esquerda do centro da porta (147 mm) {C}."
+   "obs": "{!C02} Confirmar o modelo do puxador antes de furar. No modelo, o puxador fica 7 mm à esquerda do centro da porta (147 mm) {C}."
   }
  ],
  "detalhes": {
@@ -1418,7 +1371,7 @@
      ],
      [
       "Lado das dobradiças",
-      "<b>Direito</b> (vista frontal) {E}. O parâmetro interno do componente Gábster indica “Esquerdo”: confirmar antes de furar {!C05}"
+      "<b>Direito</b> (vista frontal) {E}. O parâmetro interno do componente Gábster indica “Esquerdo”: confirmar antes de furar {!C04}"
      ],
      [
       "Dobradiças",
@@ -1494,11 +1447,11 @@
      ],
      [
       "Espessura da frente",
-      "{!C02} PDF 15 · modelo 18,5 · lista 2 × 18 + 2 × 15"
+      "{!C01} PDF 15 · modelo 18,5 · lista 2 × 18 + 2 × 15"
      ],
      [
       "Corpo da gaveta",
-      "{!C04} medidas da lista diferentes do modelo"
+      "{!C03} medidas da lista diferentes do modelo"
      ]
     ],
     "ordem": [
@@ -1559,7 +1512,7 @@
      ],
      [
       "Furos",
-      "{!C03} ±96 mm do centro (192) ou ±64 mm do centro (128), conforme o puxador confirmado. Diâmetro do furo e parafuso: não especificados {A}"
+      "{!C02} ±96 mm do centro (192) ou ±64 mm do centro (128), conforme o puxador confirmado. Diâmetro do furo e parafuso: não especificados {A}"
      ]
     ]
    }
@@ -1763,7 +1716,6 @@
     {
      "titulo": "Pendências do projeto",
      "itens": [
-      "Quantidade: o modelo tem 1 armário, 1 porta e 1 prateleira de 15 mm; a lista de corte traz armário ×2, porta ×3 e prateleira de 15 mm ×4.",
       "Espessura das frentes de gaveta: PDF 15 mm · modelo 18 mm · lista de corte 2 × 18 mm + 2 × 15 mm.",
       "Puxador: PDF Gala 128 mm · modelo haste 192 mm.",
       "Corpo da gaveta: lista de corte 526 × 98 e fundo 557 × 500 · modelo 526 × 80,8 e fundo 526 × 500.",
@@ -1784,7 +1736,7 @@
   ],
   [
    "As quantidades estão corretas?",
-   "Conferidas no modelo. Divergem da lista de corte no Módulo 02 — conflito C01."
+   "Sim. Conferidas no modelo e na lista de corte (2ª coluna do CSV): conferem em todas as peças."
   ],
   [
    "As medidas foram extraídas do modelo?",
@@ -1792,7 +1744,7 @@
   ],
   [
    "Existem peças duplicadas?",
-   "Não. Peças de mesma medida e função usam um único código com quantidade (P08–P13, P21). Em P08 a espessura diverge na lista de corte (C02)."
+   "Não. Peças de mesma medida e função usam um único código com quantidade (P08–P13, P21). Em P08 a espessura diverge na lista de corte (C01)."
   ],
   [
    "Existem peças sem identificação?",
@@ -1828,7 +1780,7 @@
   ],
   [
    "As cotas estão coerentes?",
-   "Largura e altura conferem com o PDF (0,60 · 0,75 m e 0,30 · 1,95 m). A profundidade do gaveteiro diverge do PDF (0,58 m) — C08."
+   "Largura e altura conferem com o PDF (0,60 · 0,75 m e 0,30 · 1,95 m). A profundidade do gaveteiro diverge do PDF (0,58 m) — C07."
   ],
   [
    "A vista explodida corresponde ao móvel montado?",

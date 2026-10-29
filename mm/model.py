@@ -211,7 +211,14 @@ class Project:
         S = self.spec
         self.mods = {mod['id']: mod for mod in S['modulos']}
         self.roots = {mid: self._module_roots(mod) for mid, mod in self.mods.items()}
-        self.root_idx = {mid: {i for i, _, _ in self._module_roots(mod, True)} for mid, mod in self.mods.items()}
+        # módulos repetidos: 'copias' = lista de conjuntos de raízes idênticos ao principal (só contam, não são desenhados)
+        self.copy_roots = {mid: [self._module_roots({'raizes': c}) for c in mod.get('copias', [])] for mid, mod in self.mods.items()}
+        self.root_idx = {mid: {i for i, _, _ in self._module_roots(mod, True)} | {i for c in mod.get('copias', []) for i, _, _ in self._module_roots({'raizes': c}, True)}
+                         for mid, mod in self.mods.items()}
+        for mid, cs in self.copy_roots.items():
+            for k, c in enumerate(cs):
+                if not c:
+                    self.warnings.append('Módulo %s: cópia %d sem raízes encontradas (%r)' % (mid, k + 2, self.mods[mid]['copias'][k]))
         for mid, r in self.roots.items():
             if not r:
                 self.warnings.append('Módulo %s: nenhuma raiz encontrada para %r' % (mid, self.mods[mid]['raizes']))
@@ -223,11 +230,17 @@ class Project:
                 items = [f for f in items if lo <= f['bb'][0][2] <= hi]
             if not items:
                 self.warnings.append('%s: seletor %r não encontrou peça visível' % (p['code'], p['sel']))
+            n_copias = []
+            for k, cr in enumerate(self.copy_roots[p['mod']]):
+                n = len(self._find(cr, p['sel']))
+                n_copias.append(n)
+                if n != len(items):
+                    self.warnings.append('%s: unidade %d do módulo tem %d peça(s) e a principal %d' % (p['code'], k + 2, n, len(items)))
             rows = [self.csv_by_id[i] for i in p.get('ids', []) if i in self.csv_by_id]
             for i in p.get('ids', []):
                 if i not in self.csv_by_id:
                     self.warnings.append('%s: ID %s não existe na lista de corte' % (p['code'], i))
-            parts.append(dict(p, items=items, csv=rows))
+            parts.append(dict(p, items=items, csv=rows, n_copias=n_copias))
         # origem de cada módulo: canto frontal-esquerdo da caixa (x mín., y mín.), z do modelo
         self.orig = {}
         for mid in self.mods:
@@ -246,11 +259,13 @@ class Project:
             mats = [material_info(r['mat']) for r in rows]
             q = dict(p)
             q.pop('items')
+            n_copias = q.pop('n_copias')
             q.update(boxes=boxes,
                      csv=[dict(id=r['id'], c=r['c'], l=r['l'], mat=r['mat'], lam=r['lam'], qtd=r['qtd'], item=r.get('item'), desc=r['desc']) for r in rows],
                      cor=mats[0][0] if mats else p.get('cor', ''),
                      esp_csv=sorted(set(x[2] for x in mats if x[2] is not None)),
-                     qtd_csv=sum(r['qtd'] for r in rows), qtd_modelo=len(boxes),
+                     qtd_csv=sum(r['qtd'] for r in rows), qtd_modelo=len(boxes) + sum(n_copias), qtd_unid=len(boxes),
+                     unidades=1 + len(n_copias),
                      dim_modelo=sorted([round(boxes[0][1][i] - boxes[0][0][i], 2) for i in range(3)], reverse=True) if boxes else [0, 0, 0])
             self.parts.append(q)
         self.P = {p['code']: p for p in self.parts}
@@ -267,6 +282,9 @@ class Project:
     # ------------------------------------------------------------ helpers
     def mod_parts(self, mid):
         return [p for p in self.parts if p['mod'] == mid]
+
+    def unidades(self, mid):
+        return 1 + len(self.mods[mid].get('copias', []))
 
     def mod_ids(self):
         return [m['id'] for m in self.spec['modulos']]
